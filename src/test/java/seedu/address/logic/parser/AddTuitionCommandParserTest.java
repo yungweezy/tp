@@ -30,7 +30,7 @@ import static seedu.address.testutil.TypicalStudents.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.AddTuitionCommand;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -38,8 +38,8 @@ import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
-public class AddStudentCommandParserTest {
-    private AddStudentCommandParser parser = new AddStudentCommandParser();
+public class AddTuitionCommandParserTest {
+    private AddTuitionCommandParser parser = new AddTuitionCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -48,32 +48,32 @@ public class AddStudentCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + STUDY_LEVEL_DESC_BOB + GUARDIAN_PHONE_DESC_BOB + RELATIONSHIP_DESC_BOB,
-                new AddStudentCommand(expectedStudent));
+                new AddTuitionCommand(expectedStudent));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + STUDY_LEVEL_DESC_BOB + GUARDIAN_PHONE_DESC_BOB + RELATIONSHIP_DESC_BOB,
-                new AddStudentCommand(expectedStudent));
+                new AddTuitionCommand(expectedStudent));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + STUDY_LEVEL_DESC_BOB + GUARDIAN_PHONE_DESC_BOB + RELATIONSHIP_DESC_BOB,
-                new AddStudentCommand(expectedStudent));
+                new AddTuitionCommand(expectedStudent));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + STUDY_LEVEL_DESC_BOB + GUARDIAN_PHONE_DESC_BOB + RELATIONSHIP_DESC_BOB,
-                new AddStudentCommand(expectedStudent));
+                new AddTuitionCommand(expectedStudent));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
                 + ADDRESS_DESC_BOB + STUDY_LEVEL_DESC_BOB + GUARDIAN_PHONE_DESC_BOB + RELATIONSHIP_DESC_BOB,
-                new AddStudentCommand(expectedStudent));
+                new AddTuitionCommand(expectedStudent));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTuitionCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
@@ -121,6 +121,6 @@ public class AddStudentCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + STUDY_LEVEL_DESC_BOB + GUARDIAN_PHONE_DESC_BOB + RELATIONSHIP_DESC_BOB,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTuitionCommand.MESSAGE_USAGE));
     }
 }

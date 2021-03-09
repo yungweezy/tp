@@ -53,35 +53,35 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a tuition with the same identity as {@code tuition} exists in the address book.
      */
     boolean hasTuition(Tuition tuition);
 
     /**
-     * Deletes the given student.
-     * The student must exist in the address book.
+     * Deletes the given tuition.
+     * The tuition must exist in the address book.
      */
     void deleteTuition(Tuition target);
 
     /**
-     * Adds the given student.
-     * {@code student} must not already exist in the address book.
+     * Adds the given tuition.
+     * {@code tuition} must not already exist in the address book.
      */
     void addTuition(Tuition tuition);
 
     /**
-     * Replaces the given student {@code target} with {@code editedStudent}.
+     * Replaces the given tuition {@code target} with {@code editedTuition}.
      * {@code target} must exist in the address book.
-     * The student identity of {@code editedStudent} must not be the same as another
-     * existing student in the address book.
+     * The tuition identity of {@code editedTuition} must not be the same as another
+     * existing tuition in the address book.
      */
     void setTuition(Tuition target, Tuition editedTuition);
 
-    /** Returns an unmodifiable view of the filtered student list */
+    /** Returns an unmodifiable view of the filtered tuition list */
     ObservableList<Tuition> getFilteredTuitionList();
 
     /**
-     * Updates the filter of the filtered student list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered tuition list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTuitionList(Predicate<Tuition> predicate);

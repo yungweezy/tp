@@ -11,12 +11,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_LEVEL;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.Student;
+import seedu.address.model.tuition.Tuition;
 
 /**
- * Adds a student to the address book.
+ * Adds a tuition student to the address book.
  */
-public class AddStudentCommand extends Command {
+public class AddTuitionCommand extends Command {
 
     public static final String COMMAND_WORD = "add_student";
 
@@ -41,32 +41,32 @@ public class AddStudentCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
 
-    private final Student toAdd;
+    private final Tuition toAdd;
 
     /**
-     * Creates an AddStudentCommand to add the specified {@code Student}
+     * Creates an AddTuitionCommand to add the specified {@code Tuition}
      */
-    public AddStudentCommand(Student student) {
-        requireNonNull(student);
-        toAdd = student;
+    public AddTuitionCommand(Tuition tuition) {
+        requireNonNull(tuition);
+        toAdd = tuition;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasStudent(toAdd)) {
+        if (model.hasTuition(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        model.addStudent(toAdd);
+        model.addTuition(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddStudentCommand // instanceof handles nulls
-                && toAdd.equals(((AddStudentCommand) other).toAdd));
+                || (other instanceof AddTuitionCommand // instanceof handles nulls
+                && toAdd.equals(((AddTuitionCommand) other).toAdd));
     }
 }

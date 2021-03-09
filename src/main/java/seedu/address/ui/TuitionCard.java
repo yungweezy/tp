@@ -4,14 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.student.Student;
+import seedu.address.model.tuition.Tuition;
 
 /**
- * An UI component that displays information of a {@code Student}.
+ * An UI component that displays information of a {@code Tuition}.
  */
-public class StudentCard extends UiPart<Region> {
+public class TuitionCard extends UiPart<Region> {
 
-    private static final String FXML = "StudentListCard.fxml";
+    private static final String FXML = "TuitionListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -21,7 +21,7 @@ public class StudentCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Student student;
+    public final Tuition tuition;
 
     @FXML
     private HBox cardPane;
@@ -43,19 +43,19 @@ public class StudentCard extends UiPart<Region> {
     private Label relationship;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Student} and index to display.
+     * Creates a {@code PersonCode} with the given {@code Tuition} and index to display.
      */
-    public StudentCard(Student student, int displayedIndex) {
+    public TuitionCard(Tuition tuition, int displayedIndex) {
         super(FXML);
-        this.student = student;
+        this.tuition = tuition;
         id.setText(displayedIndex + ". ");
-        name.setText(student.getName().fullName);
-        phone.setText(student.getPhone().value);
-        address.setText(student.getAddress().value);
-        email.setText(student.getEmail().value);
-        studyLevel.setText(student.getStudyLevel());
-        guardianPhone.setText(student.getGuardianPhone().value);
-        relationship.setText(student.getRelationship());
+        name.setText(tuition.getStudent().getName().fullName);
+        phone.setText(tuition.getStudent().getPhone().value);
+        address.setText(tuition.getStudent().getAddress().value);
+        email.setText(tuition.getStudent().getEmail().value);
+        studyLevel.setText(tuition.getStudent().getStudyLevel());
+        guardianPhone.setText(tuition.getStudent().getGuardianPhone().value);
+        relationship.setText(tuition.getStudent().getRelationship());
     }
 
     @Override
@@ -66,13 +66,13 @@ public class StudentCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof StudentCard)) {
+        if (!(other instanceof TuitionCard)) {
             return false;
         }
 
         // state check
-        StudentCard card = (StudentCard) other;
+        TuitionCard card = (TuitionCard) other;
         return id.getText().equals(card.id.getText())
-                && student.equals(card.student);
+                && tuition.equals(card.tuition);
     }
 }

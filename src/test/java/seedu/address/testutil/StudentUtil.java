@@ -8,8 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RELATIONSHIP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_LEVEL;
 
-import seedu.address.logic.commands.AddStudentCommand;
-import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
+import seedu.address.logic.commands.AddTuitionCommand;
+import seedu.address.logic.commands.EditCommand.EditTuitionDescriptor;
 import seedu.address.model.student.Student;
 
 /**
@@ -21,7 +21,7 @@ public class StudentUtil {
      * Returns an add command string for adding the {@code student}.
      */
     public static String getAddCommand(Student student) {
-        return AddStudentCommand.COMMAND_WORD + " " + getPersonDetails(student);
+        return AddTuitionCommand.COMMAND_WORD + " " + getPersonDetails(student);
     }
 
     /**
@@ -42,7 +42,7 @@ public class StudentUtil {
     /**
      * Returns the part of command string for the given {@code EditStudentDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditStudentDescriptor descriptor) {
+    public static String getEditPersonDescriptorDetails(EditTuitionDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

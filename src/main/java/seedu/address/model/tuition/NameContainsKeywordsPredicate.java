@@ -1,4 +1,4 @@
-package seedu.address.model.student;
+package seedu.address.model.tuition;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -8,7 +8,7 @@ import seedu.address.commons.util.StringUtil;
 /**
  * Tests that a {@code Student}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Student> {
+public class NameContainsKeywordsPredicate implements Predicate<Tuition> {
     private final List<String> keywords;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
@@ -16,9 +16,9 @@ public class NameContainsKeywordsPredicate implements Predicate<Student> {
     }
 
     @Override
-    public boolean test(Student student) {
+    public boolean test(Tuition tuition) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(student.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(tuition.getStudent().getName().fullName, keyword));
     }
 
     @Override

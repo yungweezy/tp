@@ -23,6 +23,7 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.tuition.Tuition;
 
 /**
  * Edits the details of an existing tuition student in the address book.
@@ -51,57 +52,57 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book.";
 
     private final Index index;
-    private final EditStudentDescriptor editStudentDescriptor;
+    private final EditTuitionDescriptor editTuitionDescriptor;
 
     /**
      * @param index of the student in the filtered student list to edit
-     * @param editStudentDescriptor details to edit the student with
+     * @param editTuitionDescriptor details to edit the student with
      */
-    public EditCommand(Index index, EditStudentDescriptor editStudentDescriptor) {
+    public EditCommand(Index index, EditTuitionDescriptor editTuitionDescriptor) {
         requireNonNull(index);
-        requireNonNull(editStudentDescriptor);
+        requireNonNull(editTuitionDescriptor);
 
         this.index = index;
-        this.editStudentDescriptor = new EditStudentDescriptor(editStudentDescriptor);
+        this.editTuitionDescriptor = new EditTuitionDescriptor(editTuitionDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredStudentList();
+        List<Tuition> lastShownList = model.getFilteredTuitionList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Student studentToEdit = lastShownList.get(index.getZeroBased());
-        Student editedStudent = createEditedPerson(studentToEdit, editStudentDescriptor);
+        Tuition tuitionToEdit = lastShownList.get(index.getZeroBased());
+        Tuition editedTuition = createEditedPerson(tuitionToEdit, editTuitionDescriptor);
 
-        if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
+        if (!tuitionToEdit.isSameTuition(editedTuition) && model.hasTuition(editedTuition)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setStudent(studentToEdit, editedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedStudent));
+        model.setTuition(tuitionToEdit, editedTuition);
+        model.updateFilteredTuitionList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedTuition));
     }
 
     /**
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * edited with {@code editStudentDescriptor}.
      */
-    private static Student createEditedPerson(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
-        assert studentToEdit != null;
+    private static Tuition createEditedPerson(Tuition tuitionToEdit, EditTuitionDescriptor editTuitionDescriptor) {
+        assert tuitionToEdit != null;
 
-        Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
-        Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
-        Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
-        Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
-        String updatedStudyLevel = editStudentDescriptor.getStudyLevel().orElse(studentToEdit.getStudyLevel());
-        Phone updatedGuardianPhone = editStudentDescriptor.getGuardianPhone().orElse(studentToEdit.getGuardianPhone());
-        String updatedRelationship = editStudentDescriptor.getRelationship().orElse(studentToEdit.getRelationship());
+        Name updatedName = editTuitionDescriptor.getName().orElse(tuitionToEdit.getStudent().getName());
+        Phone updatedPhone = editTuitionDescriptor.getPhone().orElse(tuitionToEdit.getStudent().getPhone());
+        Email updatedEmail = editTuitionDescriptor.getEmail().orElse(tuitionToEdit.getStudent().getEmail());
+        Address updatedAddress = editTuitionDescriptor.getAddress().orElse(tuitionToEdit.getStudent().getAddress());
+        String updatedStudyLevel = editTuitionDescriptor.getStudyLevel().orElse(tuitionToEdit.getStudent().getStudyLevel());
+        Phone updatedGuardianPhone = editTuitionDescriptor.getGuardianPhone().orElse(tuitionToEdit.getStudent().getGuardianPhone());
+        String updatedRelationship = editTuitionDescriptor.getRelationship().orElse(tuitionToEdit.getStudent().getRelationship());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStudyLevel,
+        return new Tuition(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStudyLevel,
             updatedGuardianPhone, updatedRelationship);
     }
 
@@ -120,14 +121,14 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editStudentDescriptor.equals(e.editStudentDescriptor);
+                && editTuitionDescriptor.equals(e.editTuitionDescriptor);
     }
 
     /**
      * Stores the details to edit the student with. Each non-empty field value will replace the
      * corresponding field value of the student.
      */
-    public static class EditStudentDescriptor {
+    public static class EditTuitionDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
@@ -136,12 +137,12 @@ public class EditCommand extends Command {
         private Phone guardianPhone;
         private String relationship;
 
-        public EditStudentDescriptor() {}
+        public EditTuitionDescriptor() {}
 
         /**
          * Copy constructor.
          */
-        public EditStudentDescriptor(EditStudentDescriptor toCopy) {
+        public EditTuitionDescriptor(EditTuitionDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -222,12 +223,12 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditStudentDescriptor)) {
+            if (!(other instanceof EditTuitionDescriptor)) {
                 return false;
             }
 
             // state check
-            EditStudentDescriptor e = (EditStudentDescriptor) other;
+            EditTuitionDescriptor e = (EditTuitionDescriptor) other;
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
