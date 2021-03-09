@@ -5,14 +5,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.student.Student;
+import seedu.address.model.tuition.Tuition;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Student> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Tuition> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -55,19 +55,19 @@ public interface Model {
     /**
      * Returns true if a student with the same identity as {@code student} exists in the address book.
      */
-    boolean hasStudent(Student student);
+    boolean hasTuition(Tuition tuition);
 
     /**
      * Deletes the given student.
      * The student must exist in the address book.
      */
-    void deleteStudent(Student target);
+    void deleteTuition(Tuition target);
 
     /**
      * Adds the given student.
      * {@code student} must not already exist in the address book.
      */
-    void addStudent(Student student);
+    void addTuition(Tuition tuition);
 
     /**
      * Replaces the given student {@code target} with {@code editedStudent}.
@@ -75,14 +75,14 @@ public interface Model {
      * The student identity of {@code editedStudent} must not be the same as another
      * existing student in the address book.
      */
-    void setStudent(Student target, Student editedStudent);
+    void setTuition(Tuition target, Tuition editedTuition);
 
     /** Returns an unmodifiable view of the filtered student list */
-    ObservableList<Student> getFilteredStudentList();
+    ObservableList<Tuition> getFilteredTuitionList();
 
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredStudentList(Predicate<Student> predicate);
+    void updateFilteredTuitionList(Predicate<Tuition> predicate);
 }

@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
+import seedu.address.model.tuition.Tuition;
 
 /**
  * A utility class for test cases.
@@ -36,20 +37,20 @@ public class TestUtil {
      * Returns the middle index of the student in the {@code model}'s student list.
      */
     public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredStudentList().size() / 2);
+        return Index.fromOneBased(model.getFilteredTuitionList().size() / 2);
     }
 
     /**
      * Returns the last index of the student in the {@code model}'s student list.
      */
     public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredStudentList().size());
+        return Index.fromOneBased(model.getFilteredTuitionList().size());
     }
 
     /**
      * Returns the student in the {@code model}'s student list at {@code index}.
      */
-    public static Student getPerson(Model model, Index index) {
-        return model.getFilteredStudentList().get(index.getZeroBased());
+    public static Tuition getPerson(Model model, Index index) {
+        return model.getFilteredTuitionList().get(index.getZeroBased());
     }
 }

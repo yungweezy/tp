@@ -8,12 +8,12 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
-import seedu.address.model.student.Student;
+import seedu.address.model.tuition.Tuition;
 
 /**
- * Jackson-friendly version of {@link Student}.
+ * Jackson-friendly version of {@link Tuition}.
  */
-class JsonAdaptedStudent {
+class JsonAdaptedTuition {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
 
@@ -29,7 +29,7 @@ class JsonAdaptedStudent {
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
     @JsonCreator
-    public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedTuition(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
                               @JsonProperty("studyLevel") String studyLevel,
                               @JsonProperty("guardianPhone") String guardianPhone,
@@ -46,14 +46,14 @@ class JsonAdaptedStudent {
     /**
      * Converts a given {@code Student} into this class for Jackson use.
      */
-    public JsonAdaptedStudent(Student source) {
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
-        studyLevel = source.getStudyLevel();
-        guardianPhone = source.getGuardianPhone().value;
-        relationship = source.getRelationship();
+    public JsonAdaptedTuition(Tuition source) {
+        name = source.getStudent().getName().fullName;
+        phone = source.getStudent().getPhone().value;
+        email = source.getStudent().getEmail().value;
+        address = source.getStudent().getAddress().value;
+        studyLevel = source.getStudent().getStudyLevel();
+        guardianPhone = source.getStudent().getGuardianPhone().value;
+        relationship = source.getStudent().getRelationship();
     }
 
     /**
@@ -61,7 +61,7 @@ class JsonAdaptedStudent {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
-    public Student toModelType() throws IllegalValueException {
+    public Tuition toModelType() throws IllegalValueException {
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -113,7 +113,7 @@ class JsonAdaptedStudent {
         }
         final String modelRelationship = relationship;
 
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelStudyLevel, modelGuardianPhone,
+        return new Tuition(modelName, modelPhone, modelEmail, modelAddress, modelStudyLevel, modelGuardianPhone,
             modelRelationship);
     }
 

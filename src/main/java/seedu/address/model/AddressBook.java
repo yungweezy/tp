@@ -6,7 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.UniqueStudentList;
+import seedu.address.model.tuition.Tuition;
+import seedu.address.model.tuition.UniqueTuitionList;
 
 /**
  * Wraps all data at the address-book level
@@ -14,7 +15,7 @@ import seedu.address.model.student.UniqueStudentList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniqueStudentList students;
+    private final UniqueTuitionList tuitionList;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,7 +25,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        students = new UniqueStudentList();
+        tuitionList = new UniqueTuitionList();
     }
 
     public AddressBook() {}
@@ -43,8 +44,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the student list with {@code students}.
      * {@code students} must not contain duplicate students.
      */
-    public void setStudents(List<Student> students) {
-        this.students.setStudents(students);
+    public void setTuitionList(List<Tuition> tuitionList) {
+        this.tuitionList.setTuitionList(tuitionList);
     }
 
     /**
@@ -53,7 +54,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setStudents(newData.getStudentList());
+        setTuitionList(newData.getTuitionList());
     }
 
     //// student-level operations
@@ -61,17 +62,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a student with the same identity as {@code student} exists in the address book.
      */
-    public boolean hasStudent(Student student) {
-        requireNonNull(student);
-        return students.contains(student);
+    public boolean hasTuition(Tuition tuition) {
+        requireNonNull(tuition);
+        return tuitionList.contains(tuition);
     }
 
     /**
      * Adds a student to the address book.
      * The student must not already exist in the address book.
      */
-    public void addStudent(Student p) {
-        students.add(p);
+    public void addTuition(Tuition t) {
+        tuitionList.add(t);
     }
 
     /**
@@ -80,42 +81,42 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The student identity of {@code editedStudent} must not be the same as another
      * existing student in the address book.
      */
-    public void setStudent(Student target, Student editedStudent) {
-        requireNonNull(editedStudent);
+    public void setTuition(Tuition target, Tuition editedTuition) {
+        requireNonNull(editedTuition);
 
-        students.setStudent(target, editedStudent);
+        tuitionList.setTuition(target, editedTuition);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removeStudent(Student key) {
-        students.remove(key);
+    public void removeTuition(Tuition key) {
+        tuitionList.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return students.asUnmodifiableObservableList().size() + " students";
+        return tuitionList.asUnmodifiableObservableList().size() + " students";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Student> getStudentList() {
-        return students.asUnmodifiableObservableList();
+    public ObservableList<Tuition> getTuitionList() {
+        return tuitionList.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && students.equals(((AddressBook) other).students));
+                && tuitionList.equals(((AddressBook) other).tuitionList));
     }
 
     @Override
     public int hashCode() {
-        return students.hashCode();
+        return tuitionList.hashCode();
     }
 }

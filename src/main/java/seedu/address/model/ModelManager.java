@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.student.Student;
+import seedu.address.model.tuition.Tuition;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,7 +22,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Student> filteredStudents;
+    private final FilteredList<Tuition> filteredTuitionList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,7 +35,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
+        filteredTuitionList = new FilteredList<>(this.addressBook.getTuitionList());
     }
 
     public ModelManager() {
@@ -89,27 +90,27 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasStudent(Student student) {
-        requireNonNull(student);
-        return addressBook.hasStudent(student);
+    public boolean hasTuition(Tuition tuition) {
+        requireNonNull(tuition);
+        return addressBook.hasTuition(tuition);
     }
 
     @Override
-    public void deleteStudent(Student target) {
-        addressBook.removeStudent(target);
+    public void deleteTuition(Tuition target) {
+        addressBook.removeTuition(target);
     }
 
     @Override
-    public void addStudent(Student student) {
-        addressBook.addStudent(student);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addTuition(Tuition tuition) {
+        addressBook.addTuition(tuition);
+        updateFilteredTuitionList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setStudent(Student target, Student editedStudent) {
-        requireAllNonNull(target, editedStudent);
+    public void setTuition(Tuition target, Tuition editedTuition) {
+        requireAllNonNull(target, editedTuition);
 
-        addressBook.setStudent(target, editedStudent);
+        addressBook.setTuition(target, editedTuition);
     }
 
     //=========== Filtered Student List Accessors =============================================================
@@ -119,14 +120,14 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Student> getFilteredStudentList() {
-        return filteredStudents;
+    public ObservableList<Tuition> getFilteredTuitionList() {
+        return filteredTuitionList;
     }
 
     @Override
-    public void updateFilteredStudentList(Predicate<Student> predicate) {
+    public void updateFilteredTuitionList(Predicate<Tuition> predicate) {
         requireNonNull(predicate);
-        filteredStudents.setPredicate(predicate);
+        filteredTuitionList.setPredicate(predicate);
     }
 
     @Override
@@ -145,7 +146,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredStudents.equals(other.filteredStudents);
+                && filteredTuitionList.equals(other.filteredTuitionList);
     }
 
 }

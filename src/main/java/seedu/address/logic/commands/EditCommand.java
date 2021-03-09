@@ -25,7 +25,7 @@ import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 
 /**
- * Edits the details of an existing student in the address book.
+ * Edits the details of an existing tuition student in the address book.
  */
 public class EditCommand extends Command {
 
