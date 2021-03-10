@@ -93,16 +93,16 @@ public class EditCommand extends Command {
     private static Tuition createEditedPerson(Tuition tuitionToEdit, EditTuitionDescriptor editTuitionDescriptor) {
         assert tuitionToEdit != null;
 
-        Name updatedName = editTuitionDescriptor.getName().orElse(tuitionToEdit.getStudent().getName());
-        Phone updatedPhone = editTuitionDescriptor.getPhone().orElse(tuitionToEdit.getStudent().getPhone());
-        Email updatedEmail = editTuitionDescriptor.getEmail().orElse(tuitionToEdit.getStudent().getEmail());
-        Address updatedAddress = editTuitionDescriptor.getAddress().orElse(tuitionToEdit.getStudent().getAddress());
+        Name updatedName = editTuitionDescriptor.getName().orElse(tuitionToEdit.getName());
+        Phone updatedPhone = editTuitionDescriptor.getPhone().orElse(tuitionToEdit.getPhone());
+        Email updatedEmail = editTuitionDescriptor.getEmail().orElse(tuitionToEdit.getEmail());
+        Address updatedAddress = editTuitionDescriptor.getAddress().orElse(tuitionToEdit.getAddress());
         String updatedStudyLevel = editTuitionDescriptor.getStudyLevel()
-                .orElse(tuitionToEdit.getStudent().getStudyLevel());
+                .orElse(tuitionToEdit.getStudyLevel());
         Phone updatedGuardianPhone = editTuitionDescriptor.getGuardianPhone()
-                .orElse(tuitionToEdit.getStudent().getGuardianPhone());
+                .orElse(tuitionToEdit.getGuardianPhone());
         String updatedRelationship = editTuitionDescriptor.getRelationship()
-                .orElse(tuitionToEdit.getStudent().getRelationship());
+                .orElse(tuitionToEdit.getRelationship());
 
         return new Tuition(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStudyLevel,
             updatedGuardianPhone, updatedRelationship);

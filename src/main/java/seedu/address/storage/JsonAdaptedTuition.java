@@ -47,13 +47,13 @@ class JsonAdaptedTuition {
      * Converts a given {@code Student} into this class for Jackson use.
      */
     public JsonAdaptedTuition(Tuition source) {
-        name = source.getStudent().getName().fullName;
-        phone = source.getStudent().getPhone().value;
-        email = source.getStudent().getEmail().value;
-        address = source.getStudent().getAddress().value;
-        studyLevel = source.getStudent().getStudyLevel();
-        guardianPhone = source.getStudent().getGuardianPhone().value;
-        relationship = source.getStudent().getRelationship();
+        name = source.getName().fullName;
+        phone = source.getPhone().value;
+        email = source.getEmail().value;
+        address = source.getAddress().value;
+        studyLevel = source.getStudyLevel();
+        guardianPhone = source.getGuardianPhone().value;
+        relationship = source.getRelationship();
     }
 
     /**

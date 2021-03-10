@@ -1,11 +1,13 @@
 package seedu.address.model.tuition.exceptions;
 
+import seedu.address.model.student.exceptions.DuplicateStudentException;
+
 /**
- * Signals that the operation will result in duplicate Persons (Persons are considered duplicates if they have the same
- * identity).
+ * Signals that the operation will result in duplicate Tuition (Tuition is considered a duplicate if it has the same
+ * existing Student).
  */
-public class DuplicateTuitionException extends RuntimeException {
+public class DuplicateTuitionException extends DuplicateStudentException {
     public DuplicateTuitionException() {
-        super("Operation would result in duplicate student");
+        super();
     }
 }

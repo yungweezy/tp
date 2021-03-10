@@ -1,5 +1,7 @@
 package seedu.address.model.session;
 
+import seedu.address.model.student.Student;
+
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
@@ -40,4 +42,19 @@ public class Session {
     public Fee getFee() {
         return fee;
     }
+
+    /**
+     * Returns true if both persons have the same name.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public boolean isSameSession(Session otherSession) {
+        if (otherSession == this) {
+            return true;
+        }
+
+        return otherSession != null
+                && otherSession.getSessionDate().equals(getSessionDate());
+    }
+
+
 }

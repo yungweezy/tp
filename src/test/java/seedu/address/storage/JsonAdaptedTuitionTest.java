@@ -21,13 +21,13 @@ public class JsonAdaptedTuitionTest {
     // private static final String INVALID_GUARDIAN_PHONE = "+1234";
     // private static final String INVALID_RELATIONSHIP = ""; //TODO
 
-    private static final String VALID_NAME = BENSON.getStudent().getName().toString();
-    private static final String VALID_PHONE = BENSON.getStudent().getPhone().toString();
-    private static final String VALID_EMAIL = BENSON.getStudent().getEmail().toString();
-    private static final String VALID_ADDRESS = BENSON.getStudent().getAddress().toString();
-    private static final String VALID_STUDY_LEVEL = BENSON.getStudent().getStudyLevel();
-    private static final String VALID_GUARDIAN_PHONE = BENSON.getStudent().getGuardianPhone().toString();
-    private static final String VALID_RELATIONSHIP = BENSON.getStudent().getRelationship();
+    private static final String VALID_NAME = BENSON.getName().toString();
+    private static final String VALID_PHONE = BENSON.getPhone().toString();
+    private static final String VALID_EMAIL = BENSON.getEmail().toString();
+    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
+    private static final String VALID_STUDY_LEVEL = BENSON.getStudyLevel();
+    private static final String VALID_GUARDIAN_PHONE = BENSON.getGuardianPhone().toString();
+    private static final String VALID_RELATIONSHIP = BENSON.getRelationship();
 
 
     @Test

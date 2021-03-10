@@ -49,13 +49,13 @@ public class TuitionCard extends UiPart<Region> {
         super(FXML);
         this.tuition = tuition;
         id.setText(displayedIndex + ". ");
-        name.setText(tuition.getStudent().getName().fullName);
-        phone.setText(tuition.getStudent().getPhone().value);
-        address.setText(tuition.getStudent().getAddress().value);
-        email.setText(tuition.getStudent().getEmail().value);
-        studyLevel.setText(tuition.getStudent().getStudyLevel());
-        guardianPhone.setText(tuition.getStudent().getGuardianPhone().value);
-        relationship.setText(tuition.getStudent().getRelationship());
+        name.setText(tuition.getName().fullName);
+        phone.setText(tuition.getPhone().value);
+        address.setText(tuition.getAddress().value);
+        email.setText(tuition.getEmail().value);
+        studyLevel.setText(tuition.getStudyLevel());
+        guardianPhone.setText(tuition.getGuardianPhone().value);
+        relationship.setText(tuition.getRelationship());
     }
 
     @Override

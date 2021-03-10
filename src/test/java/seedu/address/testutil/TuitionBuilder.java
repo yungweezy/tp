@@ -44,13 +44,13 @@ public class TuitionBuilder {
      * Initializes the TuitionBuilder with the data of {@code tuitionToCopy}.
      */
     public TuitionBuilder(Tuition tuitionToCopy) {
-        name = tuitionToCopy.getStudent().getName();
-        phone = tuitionToCopy.getStudent().getPhone();
-        email = tuitionToCopy.getStudent().getEmail();
-        address = tuitionToCopy.getStudent().getAddress();
-        studyLevel = tuitionToCopy.getStudent().getStudyLevel();
-        guardianPhone = tuitionToCopy.getStudent().getGuardianPhone();
-        relationship = tuitionToCopy.getStudent().getRelationship();
+        name = tuitionToCopy.getName();
+        phone = tuitionToCopy.getPhone();
+        email = tuitionToCopy.getEmail();
+        address = tuitionToCopy.getAddress();
+        studyLevel = tuitionToCopy.getStudyLevel();
+        guardianPhone = tuitionToCopy.getGuardianPhone();
+        relationship = tuitionToCopy.getRelationship();
     }
 
     /**
