@@ -3,28 +3,28 @@ package seedu.address.model.tuition;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import seedu.address.model.session.Session;
 import seedu.address.model.session.exceptions.DuplicateSessionException;
-import seedu.address.model.session.exceptions.SessionException;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Tuition {
 
     private final Student student;
-    private ObservableList<Session> sessions;
+    private List<Session> sessions;
 
     public Tuition(Name name, Phone phone, Email email, Address address,
                    String studyLevel, Phone guardianPhone, String relationship) {
         requireAllNonNull(name, phone, email, address, guardianPhone, relationship);
         this.student = new Student(name, phone, email, address, studyLevel,
                 guardianPhone, relationship);
-        this.sessions = FXCollections.observableArrayList();
+        this.sessions = new ArrayList<>();
 
     }
 
@@ -60,7 +60,7 @@ public class Tuition {
         return this.student;
     }
 
-    public ObservableList<Session> getSession() {
+    public List<Session> getSession() {
         return this.sessions;
     }
 
@@ -69,15 +69,15 @@ public class Tuition {
      */
     public boolean contains(Session toCheck) {
         requireNonNull(toCheck);
-        return getSession().stream().anyMatch(toCheck::isSameSession);
+        return getSession().contains(toCheck);
     }
 
     /**
      * Adds a session to the tuition's list of sessions.
      * @param session Session to be added.
-     * @throws SessionException is thrown when duplicate session is found in the current list of sessions.
+     * @throws DuplicateSessionException is thrown when duplicate session is found in the current list of sessions.
      */
-    public void addSession(Session session) throws SessionException {
+    public void addSession(Session session) throws DuplicateSessionException {
         requireNonNull(session);
         if (contains(session)) {
             throw new DuplicateSessionException();
