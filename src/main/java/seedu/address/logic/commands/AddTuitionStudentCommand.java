@@ -11,12 +11,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_LEVEL;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.student.Student;
 import seedu.address.model.tuition.Tuition;
 
 /**
  * Adds a tuition student to the address book.
  */
-public class AddStudentCommand extends Command {
+public class AddTuitionStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "add_student";
 
@@ -46,9 +47,9 @@ public class AddStudentCommand extends Command {
     /**
      * Creates an AddTuitionCommand to add the specified {@code Tuition}
      */
-    public AddStudentCommand(Tuition tuition) {
-        requireNonNull(tuition);
-        toAdd = tuition;
+    public AddTuitionStudentCommand(Student student) {
+        requireNonNull(student);
+        toAdd = new Tuition(student);
     }
 
     @Override
@@ -66,7 +67,7 @@ public class AddStudentCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddStudentCommand // instanceof handles nulls
-                && toAdd.equals(((AddStudentCommand) other).toAdd));
+                || (other instanceof AddTuitionStudentCommand // instanceof handles nulls
+                && toAdd.equals(((AddTuitionStudentCommand) other).toAdd));
     }
 }

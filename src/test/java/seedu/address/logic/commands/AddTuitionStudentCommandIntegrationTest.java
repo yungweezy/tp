@@ -16,7 +16,7 @@ import seedu.address.testutil.TuitionBuilder;
 /**
  * Contains integration tests (interaction with the Model) for {@code AddTuitionCommand}.
  */
-public class AddStudentCommandIntegrationTest {
+public class AddTuitionStudentCommandIntegrationTest {
 
     private Model model;
 
@@ -32,14 +32,15 @@ public class AddStudentCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTuition(validTuition);
 
-        assertCommandSuccess(new AddStudentCommand(validTuition), model,
-                String.format(AddStudentCommand.MESSAGE_SUCCESS, validTuition), expectedModel);
+        assertCommandSuccess(new AddTuitionStudentCommand(validTuition.getStudent()), model,
+                String.format(AddTuitionStudentCommand.MESSAGE_SUCCESS, validTuition), expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Tuition tuitionInList = model.getAddressBook().getTuitionList().get(0);
-        assertCommandFailure(new AddStudentCommand(tuitionInList), model, AddStudentCommand.MESSAGE_DUPLICATE_STUDENT);
+        assertCommandFailure(new AddTuitionStudentCommand(tuitionInList.getStudent()), model,
+            AddTuitionStudentCommand.MESSAGE_DUPLICATE_STUDENT);
     }
 
 }

@@ -11,33 +11,33 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_LEVEL;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.AddTuitionStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
-import seedu.address.model.tuition.Tuition;
 
 /**
  * Parses input arguments and creates a new AddTuitionCommand object
  */
-public class AddStudentCommandParser implements Parser<AddStudentCommand> {
+public class AddTuitionStudentCommandParser implements Parser<AddTuitionStudentCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddTuitionCommand
      * and returns an AddTuitionCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddStudentCommand parse(String args) throws ParseException {
+    public AddTuitionStudentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                     PREFIX_STUDY_LEVEL, PREFIX_GUARDIAN_PHONE, PREFIX_RELATIONSHIP);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
             PREFIX_STUDY_LEVEL, PREFIX_GUARDIAN_PHONE, PREFIX_RELATIONSHIP) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddTuitionStudentCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
@@ -49,9 +49,8 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         String relationship = ParserUtil.parseRelationship(argMultimap.getValue(PREFIX_RELATIONSHIP).get());
 
         Student student = new Student(name, phone, email, address, studyLevel, guardianPhone, relationship);
-        Tuition tuition = new Tuition(student);
 
-        return new AddStudentCommand(tuition);
+        return new AddTuitionStudentCommand(student);
     }
 
     /**
