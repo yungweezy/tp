@@ -22,7 +22,6 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
-import seedu.address.model.student.Student;
 import seedu.address.model.tuition.Tuition;
 
 /**
@@ -98,9 +97,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editTuitionDescriptor.getPhone().orElse(tuitionToEdit.getStudent().getPhone());
         Email updatedEmail = editTuitionDescriptor.getEmail().orElse(tuitionToEdit.getStudent().getEmail());
         Address updatedAddress = editTuitionDescriptor.getAddress().orElse(tuitionToEdit.getStudent().getAddress());
-        String updatedStudyLevel = editTuitionDescriptor.getStudyLevel().orElse(tuitionToEdit.getStudent().getStudyLevel());
-        Phone updatedGuardianPhone = editTuitionDescriptor.getGuardianPhone().orElse(tuitionToEdit.getStudent().getGuardianPhone());
-        String updatedRelationship = editTuitionDescriptor.getRelationship().orElse(tuitionToEdit.getStudent().getRelationship());
+        String updatedStudyLevel = editTuitionDescriptor.getStudyLevel()
+                .orElse(tuitionToEdit.getStudent().getStudyLevel());
+        Phone updatedGuardianPhone = editTuitionDescriptor.getGuardianPhone()
+                .orElse(tuitionToEdit.getStudent().getGuardianPhone());
+        String updatedRelationship = editTuitionDescriptor.getRelationship()
+                .orElse(tuitionToEdit.getStudent().getRelationship());
 
         return new Tuition(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStudyLevel,
             updatedGuardianPhone, updatedRelationship);

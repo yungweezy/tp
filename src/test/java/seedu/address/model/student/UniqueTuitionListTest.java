@@ -14,7 +14,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.student.exceptions.DuplicateStudentException;
+import seedu.address.model.tuition.exceptions.DuplicateTuitionException;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
 import seedu.address.model.tuition.UniqueTuitionList;
 import seedu.address.testutil.StudentBuilder;
@@ -55,7 +55,7 @@ public class UniqueTuitionListTest {
     @Test
     public void add_duplicatePerson_throwsDuplicatePersonException() {
         uniqueTuitionList.add(ALICE);
-        assertThrows(DuplicateStudentException.class, () -> uniqueTuitionList.add(ALICE));
+        assertThrows(DuplicateTuitionException.class, () -> uniqueTuitionList.add(ALICE));
     }
 
     @Test
@@ -106,7 +106,7 @@ public class UniqueTuitionListTest {
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniqueTuitionList.add(ALICE);
         uniqueTuitionList.add(BOB);
-        assertThrows(DuplicateStudentException.class, () -> uniqueTuitionList.setStudent(ALICE, BOB));
+        assertThrows(DuplicateTuitionException.class, () -> uniqueTuitionList.setStudent(ALICE, BOB));
     }
 
     @Test
@@ -159,7 +159,7 @@ public class UniqueTuitionListTest {
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Student> listWithDuplicateStudents = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicateStudentException.class, () -> uniqueTuitionList.setStudents(listWithDuplicateStudents));
+        assertThrows(DuplicateTuitionException.class, () -> uniqueTuitionList.setStudents(listWithDuplicateStudents));
     }
 
     @Test

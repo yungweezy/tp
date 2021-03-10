@@ -8,11 +8,11 @@ import seedu.address.model.Model;
 /**
  * Lists all tuition students in the address book to the user.
  */
-public class ListCommand extends Command {
+public class ListStudentCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "list_student";
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String MESSAGE_SUCCESS = "Listed all current students";
 
 
     @Override

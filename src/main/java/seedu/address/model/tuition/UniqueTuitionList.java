@@ -8,7 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.student.exceptions.DuplicateStudentException;
+import seedu.address.model.tuition.exceptions.DuplicateTuitionException;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
 
 /**
@@ -43,7 +43,7 @@ public class UniqueTuitionList implements Iterable<Tuition> {
     public void add(Tuition toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicateStudentException();
+            throw new DuplicateTuitionException();
         }
         internalList.add(toAdd);
     }
@@ -62,7 +62,7 @@ public class UniqueTuitionList implements Iterable<Tuition> {
         }
 
         if (!target.isSameTuition(editedTuition) && contains(editedTuition)) {
-            throw new DuplicateStudentException();
+            throw new DuplicateTuitionException();
         }
 
         internalList.set(index, editedTuition);
@@ -91,7 +91,7 @@ public class UniqueTuitionList implements Iterable<Tuition> {
     public void setTuitionList(List<Tuition> tuitionList) {
         requireAllNonNull(tuitionList);
         if (!tuitionListIsUnique(tuitionList)) {
-            throw new DuplicateStudentException();
+            throw new DuplicateTuitionException();
         }
 
         internalList.setAll(tuitionList);

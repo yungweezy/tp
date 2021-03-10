@@ -1,13 +1,13 @@
 package seedu.address.model.tuition;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.address.model.session.Session;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public class Tuition {
 
@@ -30,6 +30,10 @@ public class Tuition {
         return session;
     }
 
+    public void addSession(Session session) {
+        this.session = session;
+    }
+
     /**
      * Returns true if both tuition student have the same name.
      * This defines a weaker notion of equality between two tuition objects.
@@ -49,7 +53,7 @@ public class Tuition {
             return true;
         }
 
-        if (!(other instanceof  Tuition)) {
+        if (!(other instanceof Tuition)) {
             return false;
         }
 

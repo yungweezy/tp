@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTuition.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.student.Student;
-import seedu.address.testutil.StudentBuilder;
+import seedu.address.model.tuition.Tuition;
+import seedu.address.testutil.TuitionBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddStudentCommand}.
+ * Contains integration tests (interaction with the Model) for {@code AddTuitionCommand}.
  */
 public class AddTuitionCommandIntegrationTest {
 
@@ -27,19 +27,19 @@ public class AddTuitionCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Student validStudent = new StudentBuilder().build();
+        Tuition validTuition = new TuitionBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addStudent(validStudent);
+        expectedModel.addTuition(validTuition);
 
-        assertCommandSuccess(new AddTuitionCommand(validStudent), model,
-                String.format(AddTuitionCommand.MESSAGE_SUCCESS, validStudent), expectedModel);
+        assertCommandSuccess(new AddTuitionCommand(validTuition), model,
+                String.format(AddTuitionCommand.MESSAGE_SUCCESS, validTuition), expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Student studentInList = model.getAddressBook().getStudentList().get(0);
-        assertCommandFailure(new AddTuitionCommand(studentInList), model, AddTuitionCommand.MESSAGE_DUPLICATE_STUDENT);
+        Tuition tuitionInList = model.getAddressBook().getTuitionList().get(0);
+        assertCommandFailure(new AddTuitionCommand(tuitionInList), model, AddTuitionCommand.MESSAGE_DUPLICATE_STUDENT);
     }
 
 }
