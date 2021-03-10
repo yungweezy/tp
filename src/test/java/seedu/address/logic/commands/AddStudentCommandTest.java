@@ -23,11 +23,11 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.tuition.Tuition;
 import seedu.address.testutil.TuitionBuilder;
 
-public class AddTuitionCommandTest {
+public class AddStudentCommandTest {
 
     @Test
     public void constructor_nullTuition_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddTuitionCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddStudentCommand(null));
     }
 
     @Test
@@ -35,34 +35,34 @@ public class AddTuitionCommandTest {
         ModelStubAcceptingTuitionAdded modelStub = new ModelStubAcceptingTuitionAdded();
         Tuition validTuition = new TuitionBuilder().build();
 
-        CommandResult commandResult = new AddTuitionCommand(validTuition).execute(modelStub);
+        CommandResult commandResult = new AddStudentCommand(validTuition).execute(modelStub);
 
-        assertEquals(String.format(AddTuitionCommand.MESSAGE_SUCCESS, validTuition), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddStudentCommand.MESSAGE_SUCCESS, validTuition), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTuition), modelStub.tuitionAdded);
     }
 
     @Test
     public void execute_duplicateTuition_throwsCommandException() {
         Tuition validTuition = new TuitionBuilder().build();
-        AddTuitionCommand addTuitionCommand = new AddTuitionCommand(validTuition);
+        AddStudentCommand addStudentCommand = new AddStudentCommand(validTuition);
         ModelStub modelStub = new ModelStubWithTuition(validTuition);
 
-        assertThrows(CommandException.class, AddTuitionCommand.MESSAGE_DUPLICATE_STUDENT, () ->
-            addTuitionCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddStudentCommand.MESSAGE_DUPLICATE_STUDENT, () ->
+            addStudentCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Tuition alice = new TuitionBuilder().withName("Alice").build();
         Tuition bob = new TuitionBuilder().withName("Bob").build();
-        AddTuitionCommand addAliceCommand = new AddTuitionCommand(alice);
-        AddTuitionCommand addBobCommand = new AddTuitionCommand(bob);
+        AddStudentCommand addAliceCommand = new AddStudentCommand(alice);
+        AddStudentCommand addBobCommand = new AddStudentCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddTuitionCommand addAliceCommandCopy = new AddTuitionCommand(alice);
+        AddStudentCommand addAliceCommandCopy = new AddStudentCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false

@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RELATIONSHIP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_LEVEL;
 
-import seedu.address.logic.commands.AddTuitionCommand;
+import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.EditCommand.EditTuitionDescriptor;
 import seedu.address.model.tuition.Tuition;
 
@@ -21,7 +21,7 @@ public class TuitionUtil {
      * Returns an add command string for adding the {@code tuition}.
      */
     public static String getAddCommand(Tuition tuition) {
-        return AddTuitionCommand.COMMAND_WORD + " " + getPersonDetails(tuition);
+        return AddStudentCommand.COMMAND_WORD + " " + getPersonDetails(tuition);
     }
 
     /**

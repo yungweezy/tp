@@ -8,6 +8,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
 import seedu.address.model.tuition.Tuition;
 
 /**
@@ -113,8 +114,9 @@ class JsonAdaptedTuition {
         }
         final String modelRelationship = relationship;
 
-        return new Tuition(modelName, modelPhone, modelEmail, modelAddress, modelStudyLevel, modelGuardianPhone,
-            modelRelationship);
+        Student student = new Student(modelName, modelPhone, modelEmail, modelAddress, modelStudyLevel,
+            modelGuardianPhone, modelRelationship);
+        return new Tuition(student);
     }
 
 }

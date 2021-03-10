@@ -28,11 +28,9 @@ public class Tuition {
      *
      * Requires that all fields entered to be non null
      */
-    public Tuition(Name name, Phone phone, Email email, Address address,
-                   String studyLevel, Phone guardianPhone, String relationship) {
-        requireAllNonNull(name, phone, email, address, guardianPhone, relationship);
-        this.student = new Student(name, phone, email, address, studyLevel,
-                guardianPhone, relationship);
+    public Tuition(Student student) {
+        requireAllNonNull(student);
+        this.student = student;
         this.sessions = new ArrayList<>();
 
     }
@@ -104,7 +102,7 @@ public class Tuition {
         }
 
         return otherTuition != null
-                && otherTuition.getStudent().equals(getStudent());
+                && otherTuition.getStudent().isSameStudent(getStudent());
     }
 
     @Override

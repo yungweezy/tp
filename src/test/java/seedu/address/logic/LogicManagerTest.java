@@ -20,7 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.AddTuitionCommand;
+import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListStudentCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -61,7 +61,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "delete_student 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
@@ -82,7 +82,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddTuitionCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+        String addCommand = AddStudentCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + STUDY_LEVEL_DESC_AMY + GUARDIAN_PHONE_DESC_AMY + RELATIONSHIP_DESC_AMY;
         Tuition expectedTuition = new TuitionBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();

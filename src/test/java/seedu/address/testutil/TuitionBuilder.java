@@ -4,6 +4,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
 import seedu.address.model.tuition.Tuition;
 
 /**
@@ -109,8 +110,13 @@ public class TuitionBuilder {
         return this;
     }
 
+    /**
+     * Builds a {@code Tuition} object using a {@code Student} object.
+     * @return {@code Tuition} object.
+     */
     public Tuition build() {
-        return new Tuition(name, phone, email, address, studyLevel, guardianPhone, relationship);
+        Student student = new Student(name, phone, email, address, studyLevel, guardianPhone, relationship);
+        return new Tuition(student);
     }
 
 }

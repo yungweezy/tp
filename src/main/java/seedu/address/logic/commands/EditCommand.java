@@ -22,6 +22,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
 import seedu.address.model.tuition.Tuition;
 
 /**
@@ -104,8 +105,9 @@ public class EditCommand extends Command {
         String updatedRelationship = editTuitionDescriptor.getRelationship()
                 .orElse(tuitionToEdit.getRelationship());
 
-        return new Tuition(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStudyLevel,
-            updatedGuardianPhone, updatedRelationship);
+        Student student = new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStudyLevel,
+                updatedGuardianPhone, updatedRelationship);
+        return new Tuition(student);
     }
 
     @Override
