@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalStudents.ALICE;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTuition.ALICE;
+import static seedu.address.testutil.TypicalTuition.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,9 +17,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.student.Student;
+import seedu.address.model.tuition.Tuition;
 import seedu.address.model.tuition.exceptions.DuplicateTuitionException;
-import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.TuitionBuilder;
 
 public class AddressBookTest {
 
@@ -27,7 +27,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getStudentList());
+        assertEquals(Collections.emptyList(), addressBook.getTuitionList());
     }
 
     @Test
@@ -44,57 +44,57 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two students with the same identity fields
-        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+        // Two tuition with the same identity fields
+        Tuition editedAlice = new TuitionBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .build();
-        List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newStudents);
+        List<Tuition> newTuition = Arrays.asList(ALICE, editedAlice);
+        AddressBookStub newData = new AddressBookStub(newTuition);
 
         assertThrows(DuplicateTuitionException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasStudent(null));
+        assertThrows(NullPointerException.class, () -> addressBook.hasTuition(null));
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasStudent(ALICE));
+        assertFalse(addressBook.hasTuition(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addStudent(ALICE);
-        assertTrue(addressBook.hasStudent(ALICE));
+        addressBook.addTuition(ALICE);
+        assertTrue(addressBook.hasTuition(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addStudent(ALICE);
-        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+        addressBook.addTuition(ALICE);
+        Tuition editedAlice = new TuitionBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .build();
-        assertTrue(addressBook.hasStudent(editedAlice));
+        assertTrue(addressBook.hasTuition(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getStudentList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getTuitionList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose students list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose tuition list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Student> students = FXCollections.observableArrayList();
+        private final ObservableList<Tuition> tuition = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Student> students) {
-            this.students.setAll(students);
+        AddressBookStub(Collection<Tuition> tuition) {
+            this.tuition.setAll(tuition);
         }
 
         @Override
-        public ObservableList<Student> getStudentList() {
-            return students;
+        public ObservableList<Tuition> getTuitionList() {
+            return tuition;
         }
     }
 

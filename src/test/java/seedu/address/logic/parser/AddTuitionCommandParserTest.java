@@ -26,7 +26,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RELATIONSHIP_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalStudents.BOB;
+import static seedu.address.testutil.TypicalTuition.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,40 +35,40 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
-import seedu.address.model.student.Student;
-import seedu.address.testutil.StudentBuilder;
+import seedu.address.model.tuition.Tuition;
+import seedu.address.testutil.TuitionBuilder;
 
 public class AddTuitionCommandParserTest {
     private AddTuitionCommandParser parser = new AddTuitionCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Student expectedStudent = new StudentBuilder(BOB).build();
+        Tuition expectedTuition = new TuitionBuilder(BOB).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + STUDY_LEVEL_DESC_BOB + GUARDIAN_PHONE_DESC_BOB + RELATIONSHIP_DESC_BOB,
-                new AddTuitionCommand(expectedStudent));
+                new AddTuitionCommand(expectedTuition));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + STUDY_LEVEL_DESC_BOB + GUARDIAN_PHONE_DESC_BOB + RELATIONSHIP_DESC_BOB,
-                new AddTuitionCommand(expectedStudent));
+                new AddTuitionCommand(expectedTuition));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + STUDY_LEVEL_DESC_BOB + GUARDIAN_PHONE_DESC_BOB + RELATIONSHIP_DESC_BOB,
-                new AddTuitionCommand(expectedStudent));
+                new AddTuitionCommand(expectedTuition));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + STUDY_LEVEL_DESC_BOB + GUARDIAN_PHONE_DESC_BOB + RELATIONSHIP_DESC_BOB,
-                new AddTuitionCommand(expectedStudent));
+                new AddTuitionCommand(expectedTuition));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
                 + ADDRESS_DESC_BOB + STUDY_LEVEL_DESC_BOB + GUARDIAN_PHONE_DESC_BOB + RELATIONSHIP_DESC_BOB,
-                new AddTuitionCommand(expectedStudent));
+                new AddTuitionCommand(expectedTuition));
     }
 
     @Test

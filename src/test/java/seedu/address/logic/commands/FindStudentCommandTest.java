@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalStudents.CARL;
-import static seedu.address.testutil.TypicalStudents.ELLE;
-import static seedu.address.testutil.TypicalStudents.FIONA;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTuition.CARL;
+import static seedu.address.testutil.TypicalTuition.ELLE;
+import static seedu.address.testutil.TypicalTuition.FIONA;
+import static seedu.address.testutil.TypicalTuition.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -59,9 +59,9 @@ public class FindStudentCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindStudentCommand command = new FindStudentCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.updateFilteredTuitionList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredStudentList());
+        assertEquals(Collections.emptyList(), model.getFilteredTuitionList());
     }
 
     @Test
@@ -69,9 +69,9 @@ public class FindStudentCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindStudentCommand command = new FindStudentCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.updateFilteredTuitionList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredStudentList());
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredTuitionList());
     }
 
     /**

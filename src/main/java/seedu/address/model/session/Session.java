@@ -1,7 +1,5 @@
 package seedu.address.model.session;
 
-import seedu.address.model.student.Student;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**

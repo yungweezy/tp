@@ -1,12 +1,12 @@
-package seedu.address.model.student;
+package seedu.address.model.tuition;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalStudents.ALICE;
-import static seedu.address.testutil.TypicalStudents.BOB;
+import static seedu.address.testutil.TypicalTuition.ALICE;
+import static seedu.address.testutil.TypicalTuition.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,10 +14,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.tuition.exceptions.DuplicateTuitionException;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
-import seedu.address.model.tuition.UniqueTuitionList;
-import seedu.address.testutil.StudentBuilder;
+import seedu.address.model.tuition.exceptions.DuplicateTuitionException;
+import seedu.address.testutil.TuitionBuilder;
 
 public class UniqueTuitionListTest {
 
@@ -42,7 +41,7 @@ public class UniqueTuitionListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueTuitionList.add(ALICE);
-        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+        Tuition editedAlice = new TuitionBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .build();
         assertTrue(uniqueTuitionList.contains(editedAlice));
     }
@@ -60,23 +59,23 @@ public class UniqueTuitionListTest {
 
     @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueTuitionList.setStudent(null, ALICE));
+        assertThrows(NullPointerException.class, () -> uniqueTuitionList.setTuition(null, ALICE));
     }
 
     @Test
     public void setPerson_nullEditedPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueTuitionList.setStudent(ALICE, null));
+        assertThrows(NullPointerException.class, () -> uniqueTuitionList.setTuition(ALICE, null));
     }
 
     @Test
     public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        assertThrows(StudentNotFoundException.class, () -> uniqueTuitionList.setStudent(ALICE, ALICE));
+        assertThrows(StudentNotFoundException.class, () -> uniqueTuitionList.setTuition(ALICE, ALICE));
     }
 
     @Test
     public void setPerson_editedPersonIsSamePerson_success() {
         uniqueTuitionList.add(ALICE);
-        uniqueTuitionList.setStudent(ALICE, ALICE);
+        uniqueTuitionList.setTuition(ALICE, ALICE);
         UniqueTuitionList expectedUniqueTuitionList = new UniqueTuitionList();
         expectedUniqueTuitionList.add(ALICE);
         assertEquals(expectedUniqueTuitionList, uniqueTuitionList);
@@ -85,9 +84,9 @@ public class UniqueTuitionListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueTuitionList.add(ALICE);
-        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+        Tuition editedAlice = new TuitionBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .build();
-        uniqueTuitionList.setStudent(ALICE, editedAlice);
+        uniqueTuitionList.setTuition(ALICE, editedAlice);
         UniqueTuitionList expectedUniqueTuitionList = new UniqueTuitionList();
         expectedUniqueTuitionList.add(editedAlice);
         assertEquals(expectedUniqueTuitionList, uniqueTuitionList);
@@ -96,7 +95,7 @@ public class UniqueTuitionListTest {
     @Test
     public void setPerson_editedPersonHasDifferentIdentity_success() {
         uniqueTuitionList.add(ALICE);
-        uniqueTuitionList.setStudent(ALICE, BOB);
+        uniqueTuitionList.setTuition(ALICE, BOB);
         UniqueTuitionList expectedUniqueTuitionList = new UniqueTuitionList();
         expectedUniqueTuitionList.add(BOB);
         assertEquals(expectedUniqueTuitionList, uniqueTuitionList);
@@ -106,7 +105,7 @@ public class UniqueTuitionListTest {
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniqueTuitionList.add(ALICE);
         uniqueTuitionList.add(BOB);
-        assertThrows(DuplicateTuitionException.class, () -> uniqueTuitionList.setStudent(ALICE, BOB));
+        assertThrows(DuplicateTuitionException.class, () -> uniqueTuitionList.setTuition(ALICE, BOB));
     }
 
     @Test
@@ -129,7 +128,7 @@ public class UniqueTuitionListTest {
 
     @Test
     public void setPersons_nullUniquePersonList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueTuitionList.setStudents((UniqueTuitionList) null));
+        assertThrows(NullPointerException.class, () -> uniqueTuitionList.setTuitionList((UniqueTuitionList) null));
     }
 
     @Test
@@ -137,20 +136,20 @@ public class UniqueTuitionListTest {
         uniqueTuitionList.add(ALICE);
         UniqueTuitionList expectedUniqueTuitionList = new UniqueTuitionList();
         expectedUniqueTuitionList.add(BOB);
-        uniqueTuitionList.setStudents(expectedUniqueTuitionList);
+        uniqueTuitionList.setTuitionList(expectedUniqueTuitionList);
         assertEquals(expectedUniqueTuitionList, uniqueTuitionList);
     }
 
     @Test
     public void setPersons_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueTuitionList.setStudents((List<Student>) null));
+        assertThrows(NullPointerException.class, () -> uniqueTuitionList.setTuitionList((List<Tuition>) null));
     }
 
     @Test
     public void setPersons_list_replacesOwnListWithProvidedList() {
         uniqueTuitionList.add(ALICE);
-        List<Student> studentList = Collections.singletonList(BOB);
-        uniqueTuitionList.setStudents(studentList);
+        List<Tuition> tuitionList = Collections.singletonList(BOB);
+        uniqueTuitionList.setTuitionList(tuitionList);
         UniqueTuitionList expectedUniqueTuitionList = new UniqueTuitionList();
         expectedUniqueTuitionList.add(BOB);
         assertEquals(expectedUniqueTuitionList, uniqueTuitionList);
@@ -158,8 +157,9 @@ public class UniqueTuitionListTest {
 
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
-        List<Student> listWithDuplicateStudents = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicateTuitionException.class, () -> uniqueTuitionList.setStudents(listWithDuplicateStudents));
+        List<Tuition> listWithDuplicateTuition = Arrays.asList(ALICE, ALICE);
+        assertThrows(DuplicateTuitionException.class, (
+            ) -> uniqueTuitionList.setTuitionList(listWithDuplicateTuition));
     }
 
     @Test

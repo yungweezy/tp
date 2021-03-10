@@ -23,10 +23,10 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tuition.NameContainsKeywordsPredicate;
-import seedu.address.model.student.Student;
-import seedu.address.testutil.EditStudentDescriptorBuilder;
-import seedu.address.testutil.StudentBuilder;
-import seedu.address.testutil.StudentUtil;
+import seedu.address.model.tuition.Tuition;
+import seedu.address.testutil.EditTuitionDescriptorBuilder;
+import seedu.address.testutil.TuitionBuilder;
+import seedu.address.testutil.TuitionUtil;
 
 public class AddressBookParserTest {
 
@@ -34,9 +34,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Student student = new StudentBuilder().build();
-        AddTuitionCommand command = (AddTuitionCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
-        assertEquals(new AddTuitionCommand(student), command);
+        Tuition tuition = new TuitionBuilder().build();
+        AddTuitionCommand command = (AddTuitionCommand) parser.parseCommand(TuitionUtil.getAddCommand(tuition));
+        assertEquals(new AddTuitionCommand(tuition), command);
     }
 
     @Test
@@ -54,10 +54,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Student student = new StudentBuilder().build();
-        EditCommand.EditTuitionDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
+        Tuition tuition = new TuitionBuilder().build();
+        EditCommand.EditTuitionDescriptor descriptor = new EditTuitionDescriptorBuilder(tuition).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + StudentUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_PERSON.getOneBased() + " " + TuitionUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
 
     }

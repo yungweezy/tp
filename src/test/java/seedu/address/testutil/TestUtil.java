@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
-import seedu.address.model.student.Student;
 import seedu.address.model.tuition.Tuition;
 
 /**

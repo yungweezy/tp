@@ -3,6 +3,9 @@ package seedu.address.model.tuition;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.model.session.Session;
 import seedu.address.model.session.exceptions.DuplicateSessionException;
 import seedu.address.model.student.Address;
@@ -11,14 +14,20 @@ import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * Represents a {@code Tuition} that contains {@code Student} and a list of {@code Session}.
+ *
+ */
 public class Tuition {
 
     private final Student student;
     private List<Session> sessions;
 
+    /**
+     * Constructs a {@code Tuition}.
+     *
+     * Requires that all fields entered to be non null
+     */
     public Tuition(Name name, Phone phone, Email email, Address address,
                    String studyLevel, Phone guardianPhone, String relationship) {
         requireAllNonNull(name, phone, email, address, guardianPhone, relationship);

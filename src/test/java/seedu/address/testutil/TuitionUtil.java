@@ -10,37 +10,37 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_LEVEL;
 
 import seedu.address.logic.commands.AddTuitionCommand;
 import seedu.address.logic.commands.EditCommand.EditTuitionDescriptor;
-import seedu.address.model.student.Student;
+import seedu.address.model.tuition.Tuition;
 
 /**
- * A utility class for Student.
+ * A utility class for Tuition.
  */
-public class StudentUtil {
+public class TuitionUtil {
 
     /**
-     * Returns an add command string for adding the {@code student}.
+     * Returns an add command string for adding the {@code tuition}.
      */
-    public static String getAddCommand(Student student) {
-        return AddTuitionCommand.COMMAND_WORD + " " + getPersonDetails(student);
+    public static String getAddCommand(Tuition tuition) {
+        return AddTuitionCommand.COMMAND_WORD + " " + getPersonDetails(tuition);
     }
 
     /**
-     * Returns the part of command string for the given {@code student}'s details.
+     * Returns the part of command string for the given {@code tuition}'s details.
      */
-    public static String getPersonDetails(Student student) {
+    public static String getPersonDetails(Tuition tuition) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + student.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + student.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + student.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + student.getAddress().value + " ");
-        sb.append(PREFIX_STUDY_LEVEL + student.getStudyLevel() + " ");
-        sb.append(PREFIX_GUARDIAN_PHONE + student.getGuardianPhone().value + " ");
-        sb.append(PREFIX_RELATIONSHIP + student.getRelationship() + " ");
+        sb.append(PREFIX_NAME + tuition.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + tuition.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + tuition.getEmail().value + " ");
+        sb.append(PREFIX_ADDRESS + tuition.getAddress().value + " ");
+        sb.append(PREFIX_STUDY_LEVEL + tuition.getStudyLevel() + " ");
+        sb.append(PREFIX_GUARDIAN_PHONE + tuition.getGuardianPhone().value + " ");
+        sb.append(PREFIX_RELATIONSHIP + tuition.getRelationship() + " ");
         return sb.toString();
     }
 
     /**
-     * Returns the part of command string for the given {@code EditStudentDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditTuitionDescriptor}'s details.
      */
     public static String getEditPersonDescriptorDetails(EditTuitionDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();

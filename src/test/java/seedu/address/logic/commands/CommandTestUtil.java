@@ -20,8 +20,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.tuition.NameContainsKeywordsPredicate;
-import seedu.address.model.student.Student;
-import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.model.tuition.Tuition;
+import seedu.address.testutil.EditTuitionDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -70,10 +70,10 @@ public class CommandTestUtil {
     public static final EditCommand.EditTuitionDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new EditTuitionDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .build();
-        DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = new EditTuitionDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .build();
     }
@@ -114,24 +114,24 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Student> expectedFilteredList = new ArrayList<>(actualModel.getFilteredStudentList());
+        List<Tuition> expectedFilteredList = new ArrayList<>(actualModel.getFilteredTuitionList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredStudentList());
+        assertEquals(expectedFilteredList, actualModel.getFilteredTuitionList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the student at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredStudentList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTuitionList().size());
 
-        Student student = model.getFilteredStudentList().get(targetIndex.getZeroBased());
+        Tuition student = model.getFilteredTuitionList().get(targetIndex.getZeroBased());
         final String[] splitName = student.getName().fullName.split("\\s+");
-        model.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredTuitionList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredStudentList().size());
+        assertEquals(1, model.getFilteredTuitionList().size());
     }
 
 }

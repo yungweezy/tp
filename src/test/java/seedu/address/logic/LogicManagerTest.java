@@ -11,7 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.RELATIONSHIP_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STUDY_LEVEL_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalStudents.AMY;
+import static seedu.address.testutil.TypicalTuition.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -29,11 +29,11 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.student.Student;
+import seedu.address.model.tuition.Tuition;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.TuitionBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -84,16 +84,16 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand = AddTuitionCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + STUDY_LEVEL_DESC_AMY + GUARDIAN_PHONE_DESC_AMY + RELATIONSHIP_DESC_AMY;
-        Student expectedStudent = new StudentBuilder(AMY).build();
+        Tuition expectedTuition = new TuitionBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addStudent(expectedStudent);
+        expectedModel.addTuition(expectedTuition);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredStudentList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTuitionList().remove(0));
     }
 
     /**
