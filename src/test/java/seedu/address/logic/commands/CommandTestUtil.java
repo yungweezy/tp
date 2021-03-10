@@ -66,8 +66,8 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditTuitionDescriptor DESC_AMY;
-    public static final EditCommand.EditTuitionDescriptor DESC_BOB;
+    public static final EditStudentCommand.EditTuitionDescriptor DESC_AMY;
+    public static final EditStudentCommand.EditTuitionDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditTuitionDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -124,7 +124,7 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the student at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showTuitionAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredTuitionList().size());
 
         Tuition student = model.getFilteredTuitionList().get(targetIndex.getZeroBased());

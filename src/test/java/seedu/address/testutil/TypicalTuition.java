@@ -80,17 +80,17 @@ public class TypicalTuition {
     private TypicalTuition() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical students.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Tuition tuition : getTypicalPersons()) {
+        for (Tuition tuition : getTypicalTuition()) {
             ab.addTuition(tuition);
         }
         return ab;
     }
 
-    public static List<Tuition> getTypicalPersons() {
+    public static List<Tuition> getTypicalTuition() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

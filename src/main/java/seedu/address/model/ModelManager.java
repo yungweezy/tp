@@ -102,7 +102,7 @@ public class ModelManager implements Model {
     @Override
     public void addTuition(Tuition tuition) {
         addressBook.addTuition(tuition);
-        updateFilteredTuitionList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredTuitionList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override

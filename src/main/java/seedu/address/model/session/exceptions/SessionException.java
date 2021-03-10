@@ -4,7 +4,7 @@ package seedu.address.model.session.exceptions;
  * Error during the creation of a session {@link Session}.
  */
 public class SessionException extends Exception {
-    public SessionException (String message) {
+    public SessionException(String message) {
         super(message);
     }
 

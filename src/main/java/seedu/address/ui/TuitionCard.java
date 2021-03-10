@@ -43,7 +43,7 @@ public class TuitionCard extends UiPart<Region> {
     private Label relationship;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Tuition} and index to display.
+     * Creates a {@code TuitionCode} with the given {@code Tuition} and index to display.
      */
     public TuitionCard(Tuition tuition, int displayedIndex) {
         super(FXML);

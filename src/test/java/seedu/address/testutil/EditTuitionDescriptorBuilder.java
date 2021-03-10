@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditTuitionDescriptor;
+import seedu.address.logic.commands.EditStudentCommand;
+import seedu.address.logic.commands.EditStudentCommand.EditTuitionDescriptor;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -13,13 +13,13 @@ import seedu.address.model.tuition.Tuition;
  */
 public class EditTuitionDescriptorBuilder {
 
-    private EditCommand.EditTuitionDescriptor descriptor;
+    private EditStudentCommand.EditTuitionDescriptor descriptor;
 
     public EditTuitionDescriptorBuilder() {
-        descriptor = new EditCommand.EditTuitionDescriptor();
+        descriptor = new EditStudentCommand.EditTuitionDescriptor();
     }
 
-    public EditTuitionDescriptorBuilder(EditCommand.EditTuitionDescriptor descriptor) {
+    public EditTuitionDescriptorBuilder(EditStudentCommand.EditTuitionDescriptor descriptor) {
         this.descriptor = new EditTuitionDescriptor(descriptor);
     }
 
@@ -27,7 +27,7 @@ public class EditTuitionDescriptorBuilder {
      * Returns an {@code EditTuitionDescriptor} with fields containing {@code tuition}'s details
      */
     public EditTuitionDescriptorBuilder(Tuition tuition) {
-        descriptor = new EditCommand.EditTuitionDescriptor();
+        descriptor = new EditStudentCommand.EditTuitionDescriptor();
         descriptor.setName(tuition.getName());
         descriptor.setPhone(tuition.getPhone());
         descriptor.setEmail(tuition.getEmail());

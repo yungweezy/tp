@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RELATIONSHIP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_LEVEL;
 
 import seedu.address.logic.commands.AddTuitionStudentCommand;
-import seedu.address.logic.commands.EditCommand.EditTuitionDescriptor;
+import seedu.address.logic.commands.EditStudentCommand.EditTuitionDescriptor;
 import seedu.address.model.tuition.Tuition;
 
 /**
@@ -20,14 +20,14 @@ public class TuitionUtil {
     /**
      * Returns an add command string for adding the {@code tuition}.
      */
-    public static String getAddCommand(Tuition tuition) {
-        return AddTuitionStudentCommand.COMMAND_WORD + " " + getPersonDetails(tuition);
+    public static String getAddTuitionCommand(Tuition tuition) {
+        return AddTuitionStudentCommand.COMMAND_WORD + " " + getTuitionDetails(tuition);
     }
 
     /**
      * Returns the part of command string for the given {@code tuition}'s details.
      */
-    public static String getPersonDetails(Tuition tuition) {
+    public static String getTuitionDetails(Tuition tuition) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + tuition.getName().fullName + " ");
         sb.append(PREFIX_PHONE + tuition.getPhone().value + " ");
@@ -42,7 +42,7 @@ public class TuitionUtil {
     /**
      * Returns the part of command string for the given {@code EditTuitionDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditTuitionDescriptor descriptor) {
+    public static String getEditTuitionDescriptorDetails(EditTuitionDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

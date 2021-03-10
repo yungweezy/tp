@@ -26,7 +26,7 @@ public class Student {
      */
     public Student(Name name, Phone phone, Email email, Address address, String studyLevel, Phone guardianPhone,
             String relationship) {
-        requireAllNonNull(name, phone, email, address, guardianPhone, relationship);
+        requireAllNonNull(name, phone, email, address, studyLevel, guardianPhone, relationship);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -65,8 +65,8 @@ public class Student {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both students have the same name.
+     * This defines a weaker notion of equality between two students.
      */
     public boolean isSameStudent(Student otherStudent) {
         if (otherStudent == this) {
@@ -78,8 +78,8 @@ public class Student {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both students have the same identity and data fields.
+     * This defines a stronger notion of equality between two students.
      */
     @Override
     public boolean equals(Object other) {

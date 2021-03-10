@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Deliverables and deadlines / Scheduling and tracking
 * Responsibilities: Ensuring that the project is on track.
 
-### Jane Doe
+### Wong Choon Wei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yungweezy.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/yungweezy)]
+[[portfolio](team/yungweezy.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Team Lead / Integration
+* Responsibilities: Responsible for overall project coordination and integration.
 
 ### Sunaga Shion
 

@@ -43,7 +43,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicateTuition_throwsDuplicateTuitionException() {
         // Two tuition with the same identity fields
         Tuition editedAlice = new TuitionBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .build();
@@ -54,31 +54,32 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasTuition_nullTuition_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.hasTuition(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasTuition_tuitionNotInAddressBook_returnsFalse() {
         assertFalse(addressBook.hasTuition(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasTuition_tuitionInAddressBook_returnsTrue() {
         addressBook.addTuition(ALICE);
         assertTrue(addressBook.hasTuition(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasTuition_tuitionWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addTuition(ALICE);
         Tuition editedAlice = new TuitionBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertTrue(addressBook.hasTuition(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getTuitionList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getTuitionList().remove(0));
+
     }
 
     /**

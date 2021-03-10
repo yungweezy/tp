@@ -12,7 +12,7 @@ import seedu.address.model.tuition.Tuition;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Tuition> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Tuition> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

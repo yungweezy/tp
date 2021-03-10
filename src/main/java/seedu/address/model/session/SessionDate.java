@@ -1,6 +1,7 @@
 package seedu.address.model.session;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
@@ -13,7 +14,8 @@ public class SessionDate {
 
     private static final String INCORRECT_DATE_TIME_FORMAT_ERROR_MESSAGE = "Format of date or time is incorrect: ";
 
-    private LocalDate date;
+
+    private LocalDateTime dateTime;
 
     /**
      * Constructs a {@code SessionDate}.
@@ -25,8 +27,9 @@ public class SessionDate {
         try {
             LocalDate localDate = LocalDate.parse(dateValue);
             LocalTime localTime = LocalTime.parse(timeValue);
-            localDate.atTime(localTime);
-            this.date = localDate;
+
+            LocalDateTime localDateTime = localDate.atTime(localTime);
+            this.dateTime = localDateTime;
         } catch (DateTimeParseException e) {
             throw new SessionException(INCORRECT_DATE_TIME_FORMAT_ERROR_MESSAGE + e, e);
         }

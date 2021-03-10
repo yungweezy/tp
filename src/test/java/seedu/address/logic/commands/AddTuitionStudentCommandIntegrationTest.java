@@ -26,7 +26,7 @@ public class AddTuitionStudentCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
+    public void execute_newTuitionStudent_success() {
         Tuition validTuition = new TuitionBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -37,7 +37,7 @@ public class AddTuitionStudentCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateTuitionStudent_throwsCommandException() {
         Tuition tuitionInList = model.getAddressBook().getTuitionList().get(0);
         assertCommandFailure(new AddTuitionStudentCommand(tuitionInList.getStudent()), model,
             AddTuitionStudentCommand.MESSAGE_DUPLICATE_STUDENT);

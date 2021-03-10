@@ -337,7 +337,7 @@ save it with `Model#setPerson()`.
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Person studentToEdit = lastShownList.get(index.getZeroBased());
@@ -345,7 +345,7 @@ save it with `Model#setPerson()`.
                 studentToEdit.getAddress(), remark, studentToEdit.getTags());
 
         model.setPerson(studentToEdit, editedStudent);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_STUDENTS);
 
         return new CommandResult(generateSuccessMessage(editedStudent));
     }

@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RELATIONSHIP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_LEVEL;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,9 +28,9 @@ import seedu.address.model.tuition.Tuition;
 /**
  * Edits the details of an existing tuition student in the address book.
  */
-public class EditCommand extends Command {
+public class EditStudentCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "edit_student";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
             + "by the index number used in the displayed student list. "
@@ -47,9 +47,9 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Student: %1$s";
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book.";
 
     private final Index index;
     private final EditTuitionDescriptor editTuitionDescriptor;
@@ -58,7 +58,7 @@ public class EditCommand extends Command {
      * @param index of the student in the filtered student list to edit
      * @param editTuitionDescriptor details to edit the student with
      */
-    public EditCommand(Index index, EditTuitionDescriptor editTuitionDescriptor) {
+    public EditStudentCommand(Index index, EditTuitionDescriptor editTuitionDescriptor) {
         requireNonNull(index);
         requireNonNull(editTuitionDescriptor);
 
@@ -72,26 +72,26 @@ public class EditCommand extends Command {
         List<Tuition> lastShownList = model.getFilteredTuitionList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Tuition tuitionToEdit = lastShownList.get(index.getZeroBased());
-        Tuition editedTuition = createEditedPerson(tuitionToEdit, editTuitionDescriptor);
+        Tuition editedTuition = createEditedTuition(tuitionToEdit, editTuitionDescriptor);
 
         if (!tuitionToEdit.isSameTuition(editedTuition) && model.hasTuition(editedTuition)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
         model.setTuition(tuitionToEdit, editedTuition);
-        model.updateFilteredTuitionList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedTuition));
+        model.updateFilteredTuitionList(PREDICATE_SHOW_ALL_STUDENTS);
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedTuition));
     }
 
     /**
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * edited with {@code editStudentDescriptor}.
      */
-    private static Tuition createEditedPerson(Tuition tuitionToEdit, EditTuitionDescriptor editTuitionDescriptor) {
+    private static Tuition createEditedTuition(Tuition tuitionToEdit, EditTuitionDescriptor editTuitionDescriptor) {
         assert tuitionToEdit != null;
 
         Name updatedName = editTuitionDescriptor.getName().orElse(tuitionToEdit.getName());
@@ -118,12 +118,12 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditStudentCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        EditStudentCommand e = (EditStudentCommand) other;
         return index.equals(e.index)
                 && editTuitionDescriptor.equals(e.editTuitionDescriptor);
     }
