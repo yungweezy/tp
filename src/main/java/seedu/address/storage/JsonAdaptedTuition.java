@@ -27,7 +27,7 @@ class JsonAdaptedTuition {
     private final String relationship;
 
     /**
-     * Constructs a {@code JsonAdaptedStudent} with the given student details.
+     * Constructs a {@code JsonAdaptedTuition} with the given student details.
      */
     @JsonCreator
     public JsonAdaptedTuition(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
@@ -45,7 +45,7 @@ class JsonAdaptedTuition {
     }
 
     /**
-     * Converts a given {@code Student} into this class for Jackson use.
+     * Converts a given {@code Tuition} into this class for Jackson use.
      */
     public JsonAdaptedTuition(Tuition source) {
         name = source.getName().fullName;
@@ -58,7 +58,7 @@ class JsonAdaptedTuition {
     }
 
     /**
-     * Converts this Jackson-friendly adapted student object into the model's {@code Student} object.
+     * Converts this Jackson-friendly adapted Tuition object into the model's {@code Tuition} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
