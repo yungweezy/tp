@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.model.session.Session;
+import seedu.address.model.session.SessionDate;
 import seedu.address.model.session.exceptions.DuplicateSessionException;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
@@ -67,7 +68,7 @@ public class Tuition {
         return this.student;
     }
 
-    public List<Session> getSession() {
+    public List<Session> getSessionList() {
         return this.sessions;
     }
 
@@ -76,7 +77,7 @@ public class Tuition {
      */
     public boolean contains(Session toCheck) {
         requireNonNull(toCheck);
-        return getSession().contains(toCheck);
+        return getSessionList().contains(toCheck);
     }
 
     /**
@@ -89,7 +90,7 @@ public class Tuition {
         if (contains(session)) {
             throw new DuplicateSessionException();
         }
-        getSession().add(session);
+        getSessionList().add(session);
     }
 
     /**
