@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.model.session.Session;
-import seedu.address.model.session.SessionDate;
 import seedu.address.model.session.exceptions.DuplicateSessionException;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
