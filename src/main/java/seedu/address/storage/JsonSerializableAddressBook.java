@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.session.RecurringSession;
+import seedu.address.model.session.Session;
 import seedu.address.model.student.Student;
 
 /**
@@ -20,6 +22,7 @@ import seedu.address.model.student.Student;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
+    public static final String STUDENT_SESSION_OVERLAP = "Session list contains overlapping session(s).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
 
@@ -51,6 +54,17 @@ class JsonSerializableAddressBook {
             Student student = jsonAdaptedStudent.toModelType();
             if (addressBook.hasStudent(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
+            }
+            for (Session session : student.getListOfSessions()) {
+                if (session instanceof RecurringSession) {
+                    if (addressBook.hasOverlappingSession((RecurringSession) session)) {
+                        throw new IllegalValueException(STUDENT_SESSION_OVERLAP);
+                    }
+                } else {
+                    if (addressBook.hasOverlappingSession(session)) {
+                        throw new IllegalValueException(STUDENT_SESSION_OVERLAP);
+                    }
+                }
             }
             addressBook.addStudent(student);
         }
