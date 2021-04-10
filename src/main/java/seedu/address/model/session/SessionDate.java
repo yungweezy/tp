@@ -9,6 +9,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
+import seedu.address.model.Year;
+
 /**
  * Represents the date and time of the session
  */
@@ -16,7 +18,9 @@ public class SessionDate {
 
     public static final String MESSAGE_CONSTRAINTS = "Format of date and time "
             + "should be of the format "
-            + "yyyy-MM-DD and HH:MM.";
+            + "yyyy-MM-DD and HH:MM."
+            + "\n"
+            + "Also ensure the year is between 1970 and 2037.";
 
     private LocalDateTime dateTime;
 
@@ -134,12 +138,26 @@ public class SessionDate {
      */
     public static boolean isValidSessionDate(String dateValue, String timeValue) {
         try {
+            if (!isValidYear(dateValue)) {
+                return false;
+            }
             LocalDate localDate = LocalDate.parse(dateValue);
             LocalTime localTime = LocalTime.parse(timeValue);
 
             LocalDateTime localDateTime = localDate.atTime(localTime);
             return true;
         } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    //does a 2038 problem check on year after parsing
+    private static boolean isValidYear(String dateValue) {
+        try {
+            String[] dateValueSplit = dateValue.split("-", 2);
+            int year = Integer.parseInt(dateValueSplit[0]);
+            return Year.isValidYear(year);
+        } catch (NumberFormatException | NullPointerException e) {
             return false;
         }
     }

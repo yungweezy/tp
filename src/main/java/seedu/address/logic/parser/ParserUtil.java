@@ -6,8 +6,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Year;
 import seedu.address.model.fee.Month;
-import seedu.address.model.fee.Year;
 import seedu.address.model.session.Duration;
 import seedu.address.model.session.Fee;
 import seedu.address.model.session.Interval;
@@ -156,6 +156,7 @@ public class ParserUtil {
         if (!SessionDate.isValidSessionDate(trimmedDate, trimmedTime)) {
             throw new ParseException(SessionDate.MESSAGE_CONSTRAINTS);
         }
+
         return new SessionDate(trimmedDate, trimmedTime);
     }
 

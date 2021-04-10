@@ -9,8 +9,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.GetMonthlyFeeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Year;
 import seedu.address.model.fee.Month;
-import seedu.address.model.fee.Year;
 import seedu.address.model.student.Name;
 
 /**

@@ -4,8 +4,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 
+import seedu.address.model.Year;
 import seedu.address.model.fee.Month;
-import seedu.address.model.fee.Year;
 
 /**
  * A class for date time manipulation.

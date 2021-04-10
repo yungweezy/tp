@@ -161,7 +161,7 @@ public class AddStudentCommandTest {
         }
 
         @Override
-        public void deleteRecurringSession(Name name, Index sessionIndex, SessionDate sessionDate) {
+        public void deleteSessionInRecurringSession(Name name, Index sessionIndex, SessionDate sessionDate) {
             throw new AssertionError("This method should not be called.");
         }
 

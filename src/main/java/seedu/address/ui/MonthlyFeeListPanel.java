@@ -13,9 +13,9 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.DateUtil;
 import seedu.address.commons.util.FeeUtil;
+import seedu.address.model.Year;
 import seedu.address.model.fee.Month;
 import seedu.address.model.fee.MonthlyFee;
-import seedu.address.model.fee.Year;
 import seedu.address.model.student.Student;
 
 /**

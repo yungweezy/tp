@@ -136,9 +136,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteRecurringSession(Name name, Index sessionIndex, SessionDate sessionDate) {
+    public void deleteSessionInRecurringSession(Name name, Index sessionIndex, SessionDate sessionDate) {
         requireAllNonNull(name, sessionIndex, sessionDate);
-        addressBook.removeRecurringSession(name, sessionIndex, sessionDate);
+        addressBook.removeSessionInRecurringSession(name, sessionIndex, sessionDate);
     }
 
     @Override

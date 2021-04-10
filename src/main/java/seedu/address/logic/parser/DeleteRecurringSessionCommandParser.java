@@ -4,7 +4,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.stream.Stream;
 
@@ -26,9 +25,9 @@ public class DeleteRecurringSessionCommandParser implements Parser<DeleteRecurri
      */
     public DeleteRecurringSessionCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_INDEX, PREFIX_DATE, PREFIX_TIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_INDEX, PREFIX_DATE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_INDEX, PREFIX_DATE, PREFIX_TIME)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_INDEX, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteRecurringSessionCommand.MESSAGE_USAGE));
@@ -36,7 +35,7 @@ public class DeleteRecurringSessionCommandParser implements Parser<DeleteRecurri
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
         SessionDate sessionDate = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATE).get(),
-                argMultimap.getValue(PREFIX_TIME).get());
+                "00:00");
         return new DeleteRecurringSessionCommand(name, index, sessionDate);
     }
 

@@ -126,10 +126,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code name} and {@sessionIndex} must exist in the address book.
      * {@code sessionIndex} should belong to a {@code RecurringSession}.
      */
-    public void removeRecurringSession(Name name, Index sessionIndex, SessionDate sessionDate) {
+    public void removeSessionInRecurringSession(Name name, Index sessionIndex, SessionDate sessionDate) {
         requireAllNonNull(name, sessionIndex, sessionDate);
         Student student = students.getStudentWithName(name);
-        students.deleteRecurringSession(student, sessionIndex, sessionDate);
+        students.deleteSessionInRecurringSession(student, sessionIndex, sessionDate);
     }
 
     /**

@@ -8,8 +8,8 @@ import static seedu.address.testutil.TypicalStudents.ALICE;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.GetMonthlyFeeCommand;
+import seedu.address.model.Year;
 import seedu.address.model.fee.Month;
-import seedu.address.model.fee.Year;
 
 public class GetMonthlyFeeCommandParserTest {
 

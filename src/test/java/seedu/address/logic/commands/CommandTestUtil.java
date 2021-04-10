@@ -42,6 +42,12 @@ public class CommandTestUtil {
     public static final String VALID_GUARDIAN_PHONE_BOB = "98102211";
     public static final String VALID_RELATIONSHIP_AMY = "Mother";
     public static final String VALID_RELATIONSHIP_BOB = "Father";
+    public static final String VALID_RECURRING_START_DATE_AMY = "2021-04-01";
+    public static final String VALID_RECURRING_START_DATE_BOB = "2021-04-02";
+    public static final String VALID_RECURRING_END_DATE_AMY = "2021-05-06";
+    public static final String VALID_RECURRING_END_DATE_BOB = "2021-05-07";
+    public static final String VALID_TIME = "12:00";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

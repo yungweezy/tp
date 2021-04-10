@@ -16,8 +16,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.Year;
 import seedu.address.model.fee.Month;
-import seedu.address.model.fee.Year;
 import seedu.address.model.student.Name;
 
 public class GetMonthlyFeeCommandTest {

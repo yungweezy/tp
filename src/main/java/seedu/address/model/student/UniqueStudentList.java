@@ -231,8 +231,8 @@ public class UniqueStudentList implements Iterable<Student> {
      * @param sessionIndex Index of session to be deleted.
      * @param sessionDate Date to be removed from the recurring session.
      */
-    public void deleteRecurringSession(Student target, Index sessionIndex, SessionDate sessionDate) {
-        target.removeRecurringSession(sessionIndex, sessionDate);
+    public void deleteSessionInRecurringSession(Student target, Index sessionIndex, SessionDate sessionDate) {
+        target.removeSessionInRecurringSession(sessionIndex, sessionDate);
         int index = internalList.indexOf(target);
         internalList.set(index, target);
     }

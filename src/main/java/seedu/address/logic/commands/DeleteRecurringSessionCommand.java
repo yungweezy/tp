@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -28,23 +28,24 @@ public class DeleteRecurringSessionCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes a session in a recurring session identified by an index number used in the student's"
             + " list of sessions and the date of the session\n"
-            + "Parameters: n/FULLNAME i/INDEX d/DATE t/TIME \n"
+            + "Parameters: n/FULLNAME i/INDEX d/DATE \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John Doe " + PREFIX_INDEX + "1 "
-            + PREFIX_DATE + "2021-03-30 " + PREFIX_TIME + "12:00";
+            + PREFIX_DATE + "2021-03-30";
 
     public static final String MESSAGE_DELETE_SESSION_OF_RECURRING_SESSION_SUCCESS =
-            "Deleted session of Recurring Session: %1$s";
+            "Deleted session on %2$s of Recurring Session: %1$s";
 
     private final Name studentName;
 
     private final Index targetIndex;
 
-    private final SessionDate sessionDate;
+    private SessionDate sessionDate;
 
     /**
      * Creates an DeleteRecurringSessionCommand
      */
     public DeleteRecurringSessionCommand(Name studentName, Index targetIndex, SessionDate sessionDate) {
+        requireAllNonNull(studentName, targetIndex, sessionDate);
         this.studentName = studentName;
         this.targetIndex = targetIndex;
         this.sessionDate = sessionDate;
@@ -69,6 +70,8 @@ public class DeleteRecurringSessionCommand extends Command {
         if (!(sessionToDelete instanceof RecurringSession)) {
             throw new CommandException(Messages.MESSAGE_INVALID_RECURRING_SESSION_INDEX);
         }
+        sessionDate = new SessionDate(sessionDate.getDate().toString(),
+                sessionToDelete.getSessionDate().getTime().toString());
         RecurringSession recurringSessionToDelete = (RecurringSession) sessionToDelete;
         if (!recurringSessionToDelete.hasSessionOnDate(sessionDate)) {
             throw new CommandException(Messages.MESSAGE_INVALID_DATE_OF_RECURRING_SESSION);
@@ -79,9 +82,9 @@ public class DeleteRecurringSessionCommand extends Command {
         }
 
 
-        model.deleteRecurringSession(studentName, targetIndex, sessionDate);
+        model.deleteSessionInRecurringSession(studentName, targetIndex, sessionDate);
         return new CommandResult(String.format(MESSAGE_DELETE_SESSION_OF_RECURRING_SESSION_SUCCESS,
-                sessionToDelete.toString()));
+                sessionToDelete.toString(), sessionDate.getDate().toString()));
     }
 
     @Override

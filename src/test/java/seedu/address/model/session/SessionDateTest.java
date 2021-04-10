@@ -32,6 +32,10 @@ public class SessionDateTest {
         assertFalse(SessionDate.isValidSessionDate("2021-12-00", correctTimeValue));
         assertFalse(SessionDate.isValidSessionDate("2021-12-32", correctTimeValue));
 
+        //checks for 2038 year problem
+        assertFalse(SessionDate.isValidSessionDate("2038-12-01", correctTimeValue));
+        assertFalse(SessionDate.isValidSessionDate("1969-12-01", correctTimeValue));
+
         // checks for leap year
         assertFalse(SessionDate.isValidSessionDate("2021-02-29", correctTimeValue));
 

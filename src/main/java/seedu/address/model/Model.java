@@ -103,7 +103,7 @@ public interface Model {
      * Deletes the given session from a recurring session.
      * The student must exist in the address book and the session must be a recurring session.
      */
-    void deleteRecurringSession(Name name, Index sessionIndex, SessionDate sessionDate);
+    void deleteSessionInRecurringSession(Name name, Index sessionIndex, SessionDate sessionDate);
 
     /**
      * Returns true if a student with this name exists in the unique student list

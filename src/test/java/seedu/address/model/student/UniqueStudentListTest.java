@@ -4,8 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RECURRING_END_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RECURRING_START_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
 import static seedu.address.testutil.TypicalStudents.ALICE;
+import static seedu.address.testutil.TypicalStudents.AMY;
 import static seedu.address.testutil.TypicalStudents.BOB;
 
 import java.util.Arrays;
@@ -14,9 +19,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.session.RecurringSession;
 import seedu.address.model.session.Session;
+import seedu.address.model.session.SessionDate;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
+import seedu.address.testutil.RecurringSessionBuilder;
 import seedu.address.testutil.SessionBuilder;
 import seedu.address.testutil.StudentBuilder;
 
@@ -179,6 +187,122 @@ public class UniqueStudentListTest {
     public void hasName_nameExists_returnsTrue() {
         uniqueStudentList.add(ALICE);
         assertTrue(uniqueStudentList.hasName(ALICE.getName()));
+    }
+
+    @Test
+    public void removeSessionInRecurringSession_validRemoveSessionAtSessionStart() {
+        uniqueStudentList.add(AMY);
+        uniqueStudentList.add(BOB);
+        AMY.getListOfSessions().clear();
+        BOB.getListOfSessions().clear();
+        RecurringSession recurringSession =
+                new RecurringSessionBuilder()
+                        .withSessionDate(VALID_RECURRING_START_DATE_AMY, VALID_TIME)
+                        .withLastSessionDate(VALID_RECURRING_END_DATE_AMY, VALID_TIME).build();
+        AMY.addSession(recurringSession);
+        RecurringSession anotherRecurringSession =
+                new RecurringSessionBuilder()
+                        .withSessionDate(VALID_RECURRING_START_DATE_AMY, VALID_TIME)
+                        .withLastSessionDate(VALID_RECURRING_END_DATE_AMY, VALID_TIME).build();
+        anotherRecurringSession = anotherRecurringSession.withStartDate(anotherRecurringSession
+                .getSessionDate().addDays(7));
+        BOB.addSession(anotherRecurringSession);
+        SessionDate sessionDateToDelete = recurringSession.getSessionDate();
+        uniqueStudentList.deleteSessionInRecurringSession(AMY, INDEX_FIRST_SESSION, sessionDateToDelete);
+
+        assertEquals(AMY.getListOfSessions(), BOB.getListOfSessions());
+    }
+
+    @Test
+    public void removeSessionInRecurringSession_validRemoveSessionAtSessionEnd() {
+        uniqueStudentList.add(AMY);
+        uniqueStudentList.add(BOB);
+        AMY.getListOfSessions().clear();
+        BOB.getListOfSessions().clear();
+        RecurringSession recurringSession =
+                new RecurringSessionBuilder()
+                        .withSessionDate(VALID_RECURRING_START_DATE_AMY, VALID_TIME)
+                        .withLastSessionDate(VALID_RECURRING_END_DATE_AMY, VALID_TIME).build();
+        RecurringSession anotherRecurringSession =
+                new RecurringSessionBuilder()
+                        .withSessionDate(VALID_RECURRING_START_DATE_AMY, VALID_TIME)
+                        .withLastSessionDate(VALID_RECURRING_END_DATE_AMY, VALID_TIME).build();
+        anotherRecurringSession = anotherRecurringSession.withLastSessionDate(anotherRecurringSession
+                .getLastSessionDate().minusDays(7));
+        AMY.addSession(recurringSession);
+        BOB.addSession(anotherRecurringSession);
+        SessionDate sessionDateToDelete = recurringSession.getLastSessionDate();
+        uniqueStudentList.deleteSessionInRecurringSession(AMY, INDEX_FIRST_SESSION, sessionDateToDelete);
+
+        assertEquals(AMY.getListOfSessions(), BOB.getListOfSessions());
+    }
+
+    @Test
+    public void removeSessionInRecurringSession_validRemoveMiddleSession() {
+        uniqueStudentList.add(AMY);
+        uniqueStudentList.add(BOB);
+        AMY.getListOfSessions().clear();
+        BOB.getListOfSessions().clear();
+        SessionDate sessionDateToDelete = new SessionDate("2021-04-22", VALID_TIME);
+        RecurringSession recurringSession =
+                new RecurringSessionBuilder()
+                        .withSessionDate(VALID_RECURRING_START_DATE_AMY, VALID_TIME)
+                        .withLastSessionDate(VALID_RECURRING_END_DATE_AMY, VALID_TIME).build();
+        RecurringSession firstHalfRecurringSession =
+                new RecurringSessionBuilder()
+                        .withSessionDate(VALID_RECURRING_START_DATE_AMY, VALID_TIME)
+                        .withLastSessionDate(sessionDateToDelete.minusDays(7).getDate().toString(), VALID_TIME).build();
+        RecurringSession secondHalfRecurringSession =
+                new RecurringSessionBuilder()
+                        .withSessionDate(sessionDateToDelete.addDays(7).getDate().toString(), VALID_TIME)
+                        .withLastSessionDate(VALID_RECURRING_END_DATE_AMY, VALID_TIME).build();
+        AMY.addSession(recurringSession);
+        BOB.addSessions(firstHalfRecurringSession, secondHalfRecurringSession);
+        uniqueStudentList.deleteSessionInRecurringSession(AMY, INDEX_FIRST_SESSION, sessionDateToDelete);
+
+        assertEquals(AMY.getListOfSessions(), BOB.getListOfSessions());
+    }
+
+    @Test
+    public void removeSessionInRecurringSession_validRemoveSingleDayRecurringSession() {
+        uniqueStudentList.add(AMY);
+        uniqueStudentList.add(BOB);
+        AMY.getListOfSessions().clear();
+        BOB.getListOfSessions().clear();
+        RecurringSession recurringSession =
+                new RecurringSessionBuilder()
+                        .withSessionDate(VALID_RECURRING_START_DATE_AMY, VALID_TIME)
+                        .withLastSessionDate(VALID_RECURRING_START_DATE_AMY, VALID_TIME).build();
+        AMY.addSession(recurringSession);
+        SessionDate sessionDateToDelete = recurringSession.getSessionDate();
+        uniqueStudentList.deleteSessionInRecurringSession(AMY, INDEX_FIRST_SESSION, sessionDateToDelete);
+
+        assertEquals(AMY.getListOfSessions(), BOB.getListOfSessions());
+    }
+
+    @Test
+    public void removeSessionInRecurringSession_validFirstHalfNonRecurring() {
+        uniqueStudentList.add(AMY);
+        uniqueStudentList.add(BOB);
+        AMY.getListOfSessions().clear();
+        BOB.getListOfSessions().clear();
+        RecurringSession recurringSession =
+                new RecurringSessionBuilder()
+                        .withSessionDate(VALID_RECURRING_START_DATE_AMY, VALID_TIME)
+                        .withLastSessionDate(VALID_RECURRING_END_DATE_AMY, VALID_TIME).build();
+        AMY.addSession(recurringSession);
+        Session firstHalfSession =
+                new SessionBuilder()
+                        .withSessionDate(VALID_RECURRING_START_DATE_AMY, VALID_TIME).build();
+        RecurringSession secondHalfRecurringSession =
+                new RecurringSessionBuilder()
+                        .withSessionDate(recurringSession.getSessionDate().addDays(14).getDate().toString(), VALID_TIME)
+                        .withLastSessionDate(VALID_RECURRING_END_DATE_AMY, VALID_TIME).build();
+        SessionDate sessionDateToDelete = recurringSession.getSessionDate().addDays(7);
+        BOB.addSessions(firstHalfSession, secondHalfRecurringSession);
+        uniqueStudentList.deleteSessionInRecurringSession(AMY, INDEX_FIRST_SESSION, sessionDateToDelete);
+
+        assertEquals(AMY.getListOfSessions(), BOB.getListOfSessions());
     }
 
     @Test

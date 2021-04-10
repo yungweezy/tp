@@ -191,6 +191,11 @@ This section details the format of the commands available in TutorBuddy. We will
 
 * Date must be input in the format, `yyyy-mm-dd`.
   e.g. `2021-01-01` is allowed, but not `01-01-2021`.
+  
+* Year must be between 1970 and 2037, both inclusive, in consideration of the
+  [2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem)
+  e.g. `1969` and `2038` is not allowed.
+
 
 
 </div>
@@ -405,21 +410,25 @@ Example:
 ##### Deleting a recurring tuition session: `delete_rec_session`
 
 Deletes a single session from an existing recurring tuition session of a specified student from TutorBuddy.
-Spawns two recurring sessions that will span the period exclusively before and after the deleted single session.
+Splits the original recurring session into two sessions that span the period exclusively before and after the deleted single session.
 
-Format: `delete_rec_session n/STUDENT_NAME i/SESSION_INDEX d/DATE t/TIME`
+Format: `delete_rec_session n/STUDENT_NAME i/SESSION_INDEX d/DATE`
 
 Arguments similar to `delete_session` command except the following:
 * `DATE` should be the date of the single session to be deleted
-* `TIME` should be the time of the single session to be deleted
 <div markdown="block" class="alert alert-info">
-:information_source: Note that the <code>DATE</code> and <code>TIME</code> should be a valid session date that belongs in the specified recurring session
+:information_source: Note that the <code>DATE</code> should fall under a valid session date that belongs in the specified recurring session range
 </div>
 
 Example:
-* `delete_rec_session n/John Doe i/1 d/2021-03-31 t/18:00` deletes a valid single session dated 2021-03-31 18:00
-from an existing recurring session. This will spawn two recurring sessions that will span the period exclusively
-before and after 2021-03-31 18:00
+* John Doe has a recurring session from 2021-03-17 to 2021-04-14.
+* `delete_rec_session n/John Doe i/1 d/2021-03-31` deletes a valid single session dated 2021-03-31
+from an existing recurring session. 
+* This will split the recurring session into two recurring sessions that span the period exclusively
+before and after 2021-03-31 as shown below.
+
+![delete_rec_session_example](images/DeleteRecurringSession.png)
+  
 
 #### 4.2.5 Fees
 
@@ -474,7 +483,7 @@ Action | Format | Examples
 **Add Single Session** | `add_session n/STUDENT_NAME d/DATE t/TIME k/DURATION s/SUBJECT f/FEE` | `add_session n/John Doe d/2021-01-01 t/18:00 k/120 s/Biology f/80`
 **Add Recurring Session** | `add_rec_session n/STUDENT_NAME d/DATE e/LASTDATE b/INTERVAL t/TIME k/DURATION s/SUBJECT f/FEE` | `add_rec_session n/John Doe d/2021-01-01 e/2021-01-15 b/7 t/20:00 k/120 s/Geography f/80`
 **Delete Session** | `delete_session n/STUDENT_NAME i/SESSION_INDEX` | `delete_session n/John Doe i/1`
-**Delete Recurring Session** | `delete_rec_session n/STUDENT_NAME i/SESSION_INDEX d/DATE t/TIME` | `delete_rec_session n/John Doe i/1 d/2021-03-31 t/18:00`
+**Delete Recurring Session** | `delete_rec_session n/STUDENT_NAME i/SESSION_INDEX d/DATE` | `delete_rec_session n/John Doe i/1 d/2021-03-31`
 
 **Fees**
 
