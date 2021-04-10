@@ -54,18 +54,48 @@ class JsonSerializableAddressBook {
             if (addressBook.hasStudent(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
-            List<Session> sessionList = new ArrayList<>(student.getListOfSessions());
-            student.getListOfSessions().clear();
+
+            if (isSessionOverlappingExistingSession(addressBook, student.getListOfSessions())) {
+                throw new IllegalValueException(SESSION_OVERLAP);
+            }
+
+            if (isSessionOverlappingWithinStudent(student.getListOfSessions())) {
+                throw new IllegalValueException(SESSION_OVERLAP);
+            }
+
             addressBook.addStudent(student);
-            for (Session session : sessionList) {
-                if (addressBook.checkOverlapping(session)) {
-                    throw new IllegalValueException(SESSION_OVERLAP);
-                } else {
-                    addressBook.addSession(student.getName(), session);
+        }
+        return addressBook;
+    }
+
+    /**
+     * Returns true if a {@code Session} in the {@code sessionList} that overlaps with an existing {@code Session}
+     * in the {@code AddressBook}
+     */
+    public boolean isSessionOverlappingExistingSession(AddressBook addressBook, List<Session> sessionList) {
+        for (Session session : sessionList) {
+            if (addressBook.isOverlapping(session)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if any {@code Session} in the {@code sessionList} overlaps with each other.
+     */
+    public boolean isSessionOverlappingWithinStudent(List<Session> sessionList) {
+        for (int i = 0; i < sessionList.size(); i++) {
+            for (int j = 0; j < sessionList.size(); j++) {
+                if (i != j) {
+                    Session session = sessionList.get(i);
+                    if (session.isOverlapping(sessionList.get(j))) {
+                        return true;
+                    }
                 }
             }
         }
-        return addressBook;
+        return false;
     }
 
 }

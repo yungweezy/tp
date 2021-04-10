@@ -174,7 +174,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Checks if {@code Session} is a normal session, or a recurring session, then handles it accordingly.
      */
-    public boolean checkOverlapping(Session session) {
+    public boolean isOverlapping(Session session) {
         if (session instanceof RecurringSession) {
             return hasOverlappingSession((RecurringSession) session);
         } else {
